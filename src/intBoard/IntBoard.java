@@ -22,9 +22,19 @@ public class IntBoard {
 		// Init Map
 		adjMtx = new HashMap<Integer, ArrayList<Integer>>();
 		// Calc Adjacencies
-		for(int i = 1; i < COLUMNS; i++) { // iterate columns
-			for(int j = 1; j < ROWS; j++) { // iterate rows
-				
+		for(int i = 0; i < COLUMNS; i++) { // iterate columns
+			for(int j = 0; j < ROWS; j++) { // iterate rows
+				int index = calcIndex(i, j);
+				ArrayList<Integer> adjList = new ArrayList<Integer>();
+				if (i > 0) 
+					adjList.add(calcIndex(i - 1, j));	
+				if (i < COLUMNS)
+					adjList.add(calcIndex(i + 1, j));
+				if (j > 0) 
+					adjList.add(calcIndex(i, j - 1));	
+				if (j < ROWS)
+					adjList.add(calcIndex(i, j + 1));
+				adjMtx.put(index, adjList);
 			}
 		}
 	}
