@@ -32,12 +32,12 @@ public class IntBoardTests {
 	@Test
 	public void testAdjacency10()
 	{
-		ArrayList<Integer> testList = b.getAdjList(0);
+		ArrayList<Integer> testList = b.getAdjList(10);
 		Assert.assertTrue(testList.contains(6));
 		Assert.assertTrue(testList.contains(9));
 		Assert.assertTrue(testList.contains(11));
 		Assert.assertTrue(testList.contains(14));
-		Assert.assertEquals(2, testList.size());
+		Assert.assertEquals(4, testList.size());
 	}
 	@Test
 	public void testTargets0_3()

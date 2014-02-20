@@ -18,22 +18,22 @@ public class IntBoard {
 		super();
 	}
 	// Methods
-	public void calcAdjacencies() {
+	private void calcAdjacencies() {
 		// Init Map
 		adjMtx = new HashMap<Integer, ArrayList<Integer>>();
 		// Calc Adjacencies
 		for(int i = 0; i < COLUMNS; i++) { // iterate columns
 			for(int j = 0; j < ROWS; j++) { // iterate rows
-				int index = calcIndex(i, j);
+				int index = calcIndex(j, i);
 				ArrayList<Integer> adjList = new ArrayList<Integer>();
-				if (i > 0) 
-					adjList.add(calcIndex(i - 1, j));	
-				if (i < COLUMNS)
-					adjList.add(calcIndex(i + 1, j));
 				if (j > 0) 
-					adjList.add(calcIndex(i, j - 1));	
+					adjList.add(calcIndex(j - 1, i));	
 				if (j < ROWS)
-					adjList.add(calcIndex(i, j + 1));
+					adjList.add(calcIndex(j + 1, i));
+				if (i > 0) 
+					adjList.add(calcIndex(j, i - 1));	
+				if (i < COLUMNS)
+					adjList.add(calcIndex(j, i + 1));
 				adjMtx.put(index, adjList);
 			}
 		}
@@ -46,8 +46,8 @@ public class IntBoard {
 		return new HashSet<Integer>();
 	}
 	public ArrayList<Integer> getAdjList(int cell) {
-		// Stub
-		return new ArrayList<Integer>();
+		calcAdjacencies();
+		return adjMtx.get(cell);
 	}
 	public int calcIndex(int r, int c) {
 		return r * 4 + c;
