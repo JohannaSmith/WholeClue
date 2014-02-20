@@ -20,7 +20,7 @@ public class IntBoard {
 		visited = new boolean[getBoardSize()];
 	}
 	// Methods
-	private void calcAdjacencies() {
+	public void calcAdjacencies() {
 		// Init Map
 		adjMtx = new HashMap<Integer, ArrayList<Integer>>();
 		// Calc Adjacencies
@@ -28,13 +28,13 @@ public class IntBoard {
 			for(int j = 0; j < ROWS; j++) { // iterate rows
 				int index = calcIndex(j, i);
 				ArrayList<Integer> adjList = new ArrayList<Integer>();
-				if (j > 0) 
+				if (j > 0)
 					adjList.add(calcIndex(j - 1, i));	
-				if (j < ROWS)
+				if (j < ROWS - 1)
 					adjList.add(calcIndex(j + 1, i));
 				if (i > 0) 
-					adjList.add(calcIndex(j, i - 1));	
-				if (i < COLUMNS)
+					adjList.add(calcIndex(j, i - 1));
+				if (i < COLUMNS - 1)
 					adjList.add(calcIndex(j, i + 1));
 				adjMtx.put(index, adjList);
 			}
@@ -42,17 +42,22 @@ public class IntBoard {
 	}
 	public void startTargets(int cell, int steps) { // Calculate
 		targets = new HashSet<Integer>();
+		visited[cell] = true;
 		calcTargets(cell, steps);
+		visited[cell] = false;
 	}
 	private void calcTargets(int cell, int steps) {
-		for(int adjCell : getAdjList(cell)) {
+		steps--;
+		ArrayList<Integer> adjacentCells = new ArrayList<Integer>();
+		for(int c : adjMtx.get(cell))
+			if(!visited[c])
+				adjacentCells.add(c);
+		for(int adjCell : adjacentCells) {
 			visited[adjCell] = true;
-			if(steps == 1) {
-				targets.add(cell);
-			}
-			else {
-				calcTargets(cell, steps--);
-			}
+			if(steps == 0)
+				targets.add(adjCell);
+			else
+				calcTargets(adjCell, steps);
 			visited[adjCell] = false;
 		}
 	}
@@ -60,7 +65,6 @@ public class IntBoard {
 		return targets;
 	}
 	public ArrayList<Integer> getAdjList(int cell) {
-		calcAdjacencies();
 		return adjMtx.get(cell);
 	}
 	public int calcIndex(int r, int c) {

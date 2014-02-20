@@ -14,6 +14,7 @@ public class IntBoardTests {
 	@Before
 	public void setup() {
 		b = new IntBoard();
+		b.calcAdjacencies();
 	}
 	@Test
 	public void calcIndexes() {
@@ -40,6 +41,14 @@ public class IntBoardTests {
 		Assert.assertEquals(4, testList.size());
 	}
 	@Test
+	public void testAdjacency3()
+	{
+		ArrayList<Integer> testList = b.getAdjList(3);
+		Assert.assertTrue(testList.contains(2));
+		Assert.assertTrue(testList.contains(7));
+		Assert.assertEquals(2, testList.size());
+	}
+	@Test
 	public void testTargets0_3()
 	{
 		b.startTargets(0, 3);
@@ -56,6 +65,7 @@ public class IntBoardTests {
 	public void testTargets2_2() {
 		b.startTargets(2, 2);
 		Set<Integer> targets = b.getTargets();
+		System.out.println(targets);
 		Assert.assertEquals(4, targets.size());
 		Assert.assertTrue(targets.contains(0));
 		Assert.assertTrue(targets.contains(5));
