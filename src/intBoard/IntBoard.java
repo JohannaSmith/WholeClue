@@ -9,13 +9,15 @@ import java.util.Set;
 public class IntBoard {
 	// Instance Vars
 	private Map<Integer, ArrayList<Integer>> adjMtx;
-	private boolean[] visited;
+	private Set<Integer> targets;
+	boolean[] visited;
 	private static final int COLUMNS = 4;
 	private static final int ROWS = 4;
 	
 	// Constructor
 	public IntBoard() {
 		super();
+		visited = new boolean[getBoardSize()];
 	}
 	// Methods
 	private void calcAdjacencies() {
@@ -39,11 +41,23 @@ public class IntBoard {
 		}
 	}
 	public void startTargets(int cell, int steps) { // Calculate
-		// Stub
+		targets = new HashSet<Integer>();
+		calcTargets(cell, steps);
+	}
+	private void calcTargets(int cell, int steps) {
+		for(int adjCell : getAdjList(cell)) {
+			visited[adjCell] = true;
+			if(steps == 1) {
+				targets.add(cell);
+			}
+			else {
+				calcTargets(cell, steps--);
+			}
+			visited[adjCell] = false;
+		}
 	}
 	public Set<Integer> getTargets() { // Return
-		// Stub
-		return new HashSet<Integer>();
+		return targets;
 	}
 	public ArrayList<Integer> getAdjList(int cell) {
 		calcAdjacencies();
@@ -51,5 +65,8 @@ public class IntBoard {
 	}
 	public int calcIndex(int r, int c) {
 		return r * 4 + c;
+	}
+	public int getBoardSize() {
+		return ROWS * COLUMNS;
 	}
 }
