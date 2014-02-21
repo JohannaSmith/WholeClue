@@ -11,17 +11,22 @@ public class Board {
 	int numRows;
 	int numColumns;
 	// Filenames
-	private static final String LEGENDFILE = "legend.csv";
-	private static final String BOARDLAYOUTFILE = "boardlayout.csv";
+	private String legendfile;
+	private String boardlayoutfile;
 	// Constructor
 	public Board() {
 		super();
-		// Stub
+		legendfile = "legend.csv";
+		boardlayoutfile = "boardlayout.csv";
+	}
+	public Board(String legendfilename, String boardlayoutfilename) {
+		legendfile = legendfilename;
+		boardlayoutfile = boardlayoutfilename;
 	}
 	// Load Board
 	public void loadConfigFiles() {
-		loadLegend(new File(LEGENDFILE));
-		loadBoard(new File(BOARDLAYOUTFILE));
+		loadLegend(new File(legendfile));
+		loadBoard(new File(boardlayoutfile));
 	}
 	private void loadLegend(File f) {
 		// Stub
@@ -43,5 +48,8 @@ public class Board {
 	}
 	public String getRoom(char c) {
 		return rooms.get(c);
+	}
+	public int getRoomCount() {
+		return rooms.keySet().size();
 	}
 }
