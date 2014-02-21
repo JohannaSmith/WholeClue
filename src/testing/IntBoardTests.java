@@ -1,13 +1,13 @@
 package testing;
 
-import intBoard.IntBoard;
-
 import java.util.ArrayList;
 import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import clueGame.IntBoard;
 
 public class IntBoardTests {
 	IntBoard b;
