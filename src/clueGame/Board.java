@@ -8,8 +8,8 @@ public class Board {
 	// Instance Vars
 	ArrayList<BoardCell> cells;
 	Map<Character,String> rooms;
-	int numRows;
-	int numColumns;
+	private int numRows;
+	private int numColumns;
 	// Filenames
 	private String legendfile;
 	private String boardlayoutfile;
@@ -51,5 +51,11 @@ public class Board {
 	}
 	public int getRoomCount() {
 		return rooms.keySet().size();
+	}
+	public int getNumRows() {
+		return numRows;
+	}
+	public int getNumColumns() {
+		return numColumns;
 	}
 }

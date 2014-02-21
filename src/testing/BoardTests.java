@@ -1,5 +1,7 @@
 package testing;
 
+import static org.junit.Assert.*;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -8,6 +10,8 @@ import clueGame.Board;
 
 public class BoardTests {
 	private static Board board;
+	private final int ROWS = 25;
+	private final int COLUMNS = 25;
 	
 	@BeforeClass
 	public static void setUp() {
@@ -27,6 +31,11 @@ public class BoardTests {
 		Assert.assertTrue(board.getRoom('D') == "Dining Room");
 		Assert.assertTrue(board.getRoom('O') == "Obervatory");
 		Assert.assertTrue(board.getRoom('X') == "Closet");
+	}
+	@Test
+	public void testBoardDimensions() {
+		Assert.assertEquals(ROWS, board.getNumRows());
+		Assert.assertEquals(COLUMNS, board.getNumColumns());
 	}
 	
 	
