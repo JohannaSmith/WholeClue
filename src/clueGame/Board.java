@@ -84,7 +84,7 @@ public class Board {
 				break;
 			String[] arr = line.split(",");
 			if(!numColumnsSet) {
-				numColumns = arr.length;
+				numColumns = arr.length; //maybe + 1 to clear up the 0 index
 				numColumnsSet = true;
 			}
 			else if(arr.length != numColumns) {
@@ -95,7 +95,7 @@ public class Board {
 					cells.add(new WalkwayCell());
 				}
 				else if(rooms.get(s).toLowerCase().endsWith(ROOM_ENDING_WORD.toLowerCase())) { // Room
-					Character initial = s.toCharArray()[0];
+					Character initial = s.toCharArray()[0];										//Not all of the rooms end in room
 					RoomCell.DoorDirection direction;
 					if(s.length() == 1) {
 						direction = RoomCell.DoorDirection.NONE;
@@ -125,7 +125,7 @@ public class Board {
 				}
 			}
 		} while(in.hasNextLine());
-		numRows = cells.size() % numColumns;
+		numRows = cells.size() % numColumns; //couldn't this just be numRows += 1 since numRows could potentially be larger than numColumns
 		numRowsSet = true;
 		visited = new boolean[getBoardSize()];
 		in.close();
@@ -202,7 +202,7 @@ public class Board {
 	public void calcTargets(int cell, int steps) { // Calculate
 		targets = new HashSet<BoardCell>();
 		visited[cell] = true;
-		calcTargets(cell, steps);
+		calcTargets(cell, steps); //infinite recursion???
 		visited[cell] = false;
 	}
 	private void calcTargetsRecurse(int cell, int steps) {

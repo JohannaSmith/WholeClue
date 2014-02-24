@@ -7,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.RoomCell;
 
 public class BoardTests {
 	private static Board board;
@@ -39,7 +40,8 @@ public class BoardTests {
 	}
 	@Test
 	public void testDoorDirection() {
-		
+		RoomCell door = board.getRoomCellAt(3, 6);
+		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, door.getDoorDirection());
 	}
 	
 	
