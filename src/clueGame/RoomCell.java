@@ -2,8 +2,9 @@ package clueGame;
 
 public class RoomCell extends BoardCell{
 	
-	public RoomCell(DoorDirection doordirection) {
+	public RoomCell(Character roomInitial, DoorDirection doordirection) {
 		super();
+		this.roomInitial = roomInitial;
 		this.doordirection = doordirection;
 	}
 
@@ -23,6 +24,9 @@ public class RoomCell extends BoardCell{
 	}
 	public DoorDirection getDoorDirection() {
 		return doordirection;
+	}
+	public char getInitial() {
+		return roomInitial;
 	}
 	//to do override draw method
 
