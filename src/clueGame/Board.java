@@ -84,7 +84,7 @@ public class Board {
 				break;
 			String[] arr = line.split(",");
 			if(!numColumnsSet) {
-				numColumns = arr.length; //maybe + 1 to clear up the 0 index
+				numColumns = arr.length + 1;
 				numColumnsSet = true;
 			}
 			else if(arr.length != numColumns) {
@@ -125,7 +125,7 @@ public class Board {
 				}
 			}
 		} while(in.hasNextLine());
-		numRows = cells.size() % numColumns; //couldn't this just be numRows += 1 since numRows could potentially be larger than numColumns
+		numRows = cells.size() / numColumns; //couldn't this just be numRows += 1 since numRows could potentially be larger than numColumns
 		numRowsSet = true;
 		visited = new boolean[getBoardSize()];
 		in.close();
