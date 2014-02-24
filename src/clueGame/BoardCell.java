@@ -1,9 +1,9 @@
 package clueGame;
 
 public abstract class BoardCell {
+	
 	//instance vars
-	private int row;
-	private int column;
+	private int cell;
 	
 	//Methods
 	public boolean isWalkway() {

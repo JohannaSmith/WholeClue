@@ -37,7 +37,10 @@ public class BoardTests {
 		Assert.assertEquals(ROWS, board.getNumRows());
 		Assert.assertEquals(COLUMNS, board.getNumColumns());
 	}
-	
+	@Test
+	public void testDoorDirection() {
+		
+	}
 	
 	
 }
