@@ -1,4 +1,4 @@
-package testing;
+package clueTests;
 
 import java.util.ArrayList;
 import java.util.Set;

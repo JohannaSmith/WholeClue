@@ -1,4 +1,4 @@
-package testing;
+package clueTests;
 
 import static org.junit.Assert.*;
 
