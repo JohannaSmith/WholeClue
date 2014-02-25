@@ -41,9 +41,32 @@ public class BoardInitTests {
 		Assert.assertEquals(COLUMNS, board.getNumColumns());
 	}
 	@Test
-	public void testDoorDirection() {
+	public void testDoors() {
 		RoomCell door = board.getRoomCellAt(3, 6);
+		Assert.assertTrue(door.isDoorway());
 		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, door.getDoorDirection());
+		RoomCell door2 = board.getRoomCellAt(11, 3);
+		Assert.assertTrue(door2.isDoorway());
+		Assert.assertEquals(RoomCell.DoorDirection.DOWN, door2.getDoorDirection());
+		RoomCell door3 = board.getRoomCellAt(4, 9);
+		Assert.assertTrue(door3.isDoorway());
+		Assert.assertEquals(RoomCell.DoorDirection.LEFT, door3.getDoorDirection());
+		RoomCell door4 = board.getRoomCellAt(17, 10);
+		Assert.assertTrue(door4.isDoorway());
+		Assert.assertEquals(RoomCell.DoorDirection.UP, door4.getDoorDirection());
+		RoomCell door5 = board.getRoomCellAt(2, 2);
+		Assert.assertTrue(!door5.isDoorway());
+		Assert.assertEquals(RoomCell.DoorDirection.NONE, door5.getDoorDirection());
+	}
+	@Test
+	public void testRoomInitials() {
+		RoomCell room = board.getRoomCellAt(2, 2);
+		Assert.assertTrue(room.getInitial() == 'C');
+		RoomCell room2 = board.getRoomCellAt(8, 2);
+		Assert.assertTrue(room2.getInitial() == 'L');
+		RoomCell room3 = board.getRoomCellAt(20, 10);
+		Assert.assertTrue(room3.getInitial() == 'D');
+		
 	}
 	
 	
