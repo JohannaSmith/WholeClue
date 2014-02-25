@@ -71,7 +71,6 @@ public class BoardInitTests {
 		Assert.assertTrue(room3.getInitial() == 'D');
 		
 	}
-	
 	@Test
 	public void TestCalcIndex() {
 		Assert.assertEquals(0, board.calcIndex(0, 0));

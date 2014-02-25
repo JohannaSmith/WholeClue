@@ -1,0 +1,12 @@
+C,Conservatory
+R,Billiard Room
+S,Study
+L,Library
+H,Hall,afdadf
+B,Ballroom
+K,Kitchen
+D,Dining Room
+O,Observatory
+W,Walkway
+N,Not a Space
+X,Closet
