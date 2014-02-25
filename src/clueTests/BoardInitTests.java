@@ -2,10 +2,13 @@ package clueTests;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.RoomCell;
 
@@ -46,5 +49,46 @@ public class BoardInitTests {
 		Assert.assertEquals(RoomCell.DoorDirection.RIGHT, door.getDoorDirection());
 	}
 	
-	
+	@Test
+	public void TestCalcIndex() {
+		Assert.assertEquals(0, board.calcIndex(0, 0));
+		Assert.assertEquals(624, board.calcIndex(24, 24));
+		Assert.assertEquals(31, board.calcIndex(1, 6));
+		Assert.assertEquals(176, board.calcIndex(7, 1));
+	}
+	// Bad Column Mismatch
+	@Test (expected = BadConfigFormatException.class)
+	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
+		Board b = new Board("./badboardfiles/badcolumnsboardlayout.csv", "./ourboardfiles/legend.txt");
+		b.loadLegend();
+		b.loadBoard();
+	}
+	// Bad Room
+	@Test (expected = BadConfigFormatException.class)
+	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
+		Board b = new Board("./badboardfiles/badroomboardlayout.csv", "./ourboardfiles/legend.txt");
+		b.loadLegend();
+		b.loadBoard();
+	}
+	// Bad Legend
+	@Test (expected = BadConfigFormatException.class)
+	public void testBadLegend() throws BadConfigFormatException, FileNotFoundException {
+		Board b = new Board("./ourboardfiles/boardlayout.csv", "./badboardfiles/badlegend.txt");
+		b.loadLegend();
+		b.loadBoard();
+	}
+	// No Layout File
+	@Test (expected = FileNotFoundException.class)
+	public void testBadFileName1() throws BadConfigFormatException, FileNotFoundException {
+		Board b = new Board("./badboardfiles/no.file", "./ourboardfiles/legend.txt");
+		b.loadLegend();
+		b.loadBoard();
+	}
+	// No Legend File
+	@Test (expected = FileNotFoundException.class)
+	public void testBadFileName2() throws BadConfigFormatException, FileNotFoundException {
+		Board b = new Board("./ourboardfiles/boardlayout.csv", "./badboardfiles/no.file");
+		b.loadLegend();
+		b.loadBoard();
+	}
 }

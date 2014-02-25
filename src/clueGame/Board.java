@@ -26,14 +26,16 @@ public class Board {
 	// Filenames
 	private String legendfile;
 	private String boardlayoutfile;
+	public static final String LEGEND_FILE_DEFAULT = "./ourboardfiles/legend.txt";
+	public static final String LAYOUT_FILE_DEFAULT = "./ourboardfiles/boardlayout.csv";
 	// Legend Reserved Words
 	public static final String WALKWAY_WORD = "Walkway";
 	public static final String NOTASPACE_WORD = "Not a Space";
 	// Constructor
 	public Board() {
 		super();
-		legendfile = "legend.txt";
-		boardlayoutfile = "boardlayout.csv";
+		legendfile = LEGEND_FILE_DEFAULT;
+		boardlayoutfile = LAYOUT_FILE_DEFAULT;
 		cells = new LinkedList<BoardCell>();
 		rooms = new HashMap<Character, String>();
 		numRowsSet = false;
@@ -142,10 +144,6 @@ public class Board {
 		visited = new boolean[getBoardSize()];
 		in.close();
 	}
-	// Calculate Index
-	public int calcIndex(int r, int c) {
-		return r * numColumns + c;
-	}
 	// Calculate Adjacencies / Paths
 	public void calcAdjacencies() {
 		// Init Map
@@ -231,6 +229,10 @@ public class Board {
 				calcTargets(adjCell, steps);
 			visited[adjCell] = false;
 		}
+	}
+	// Calculate Indexes
+	public int calcIndex(int r, int c) {
+		return r * numColumns + c;
 	}
 	// Getters
 	public Set<BoardCell> getTargets() { // Return
