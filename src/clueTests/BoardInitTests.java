@@ -1,10 +1,9 @@
 package clueTests;
 
-import static org.junit.Assert.*;
+import org.junit.Assert;
 
 import java.io.FileNotFoundException;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

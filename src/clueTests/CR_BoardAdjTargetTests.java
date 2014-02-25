@@ -189,6 +189,7 @@ public class CR_BoardAdjTargetTests {
 	public void testTargetsTwoSteps() {
 		board.calcTargets(21, 7, 2);
 		Set<BoardCell> targets= board.getTargets();
+		System.out.println(targets.size());
 		Assert.assertEquals(2, targets.size());
 		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(19, 7))));
 		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(20, 6))));

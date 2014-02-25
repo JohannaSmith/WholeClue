@@ -153,56 +153,58 @@ public class Board {
 			for(int j = 0; j < numRows; j++) { // iterate rows
 				int index = calcIndex(j, i);
 				LinkedList<Integer> adjList = new LinkedList<Integer>();
-				int index2;
-				if (j > 0) { // Top
-					index2 = calcIndex(j - 1, i);
-					if(cells.get(index2).isWalkway()) {
-						adjList.add(index2);
-					}
-					else if(cells.get(index2).isDoorway()) {
-						RoomCell c = (RoomCell) cells.get(index2);
-						if(c.getDoorDirection() == RoomCell.DoorDirection.DOWN) {
+				if(cells.get(calcIndex(j, i)).isDoorway() || cells.get(calcIndex(j, i)).isWalkway()) {
+					int index2;
+					if (j > 0) { // Top
+						index2 = calcIndex(j - 1, i);
+						if(cells.get(index2).isWalkway()) {
 							adjList.add(index2);
+						}
+						else if(cells.get(index2).isDoorway()) {
+							RoomCell c = (RoomCell) cells.get(index2);
+							if(c.getDoorDirection() == RoomCell.DoorDirection.DOWN) {
+								adjList.add(index2);
+							}
+						}
+					}
+					if (j < numRows - 1) { // Bottom
+						index2 = calcIndex(j + 1, i);
+						if(cells.get(index2).isWalkway()) {
+							adjList.add(index2);
+						}
+						else if(cells.get(index2).isDoorway()) {
+							RoomCell c = (RoomCell) cells.get(index2);
+							if(c.getDoorDirection() == RoomCell.DoorDirection.UP) {
+								adjList.add(index2);
+							}
+						}
+					}
+					if (i > 0) { // Left
+						index2 = calcIndex(j, i - 1);
+						if(cells.get(index2).isWalkway()) {
+							adjList.add(index2);
+						}
+						else if(cells.get(index2).isDoorway()) {
+							RoomCell c = (RoomCell) cells.get(index2);
+							if(c.getDoorDirection() == RoomCell.DoorDirection.RIGHT) {
+								adjList.add(index2);
+							}
+						}
+					}
+					if (i < numColumns - 1) { // Right
+						index2 = calcIndex(j, i + 1);
+						if(cells.get(index2).isWalkway()) {
+							adjList.add(index2);
+						}
+						else if(cells.get(index2).isDoorway()) {
+							RoomCell c = (RoomCell) cells.get(index2);
+							if(c.getDoorDirection() == RoomCell.DoorDirection.LEFT) {
+								adjList.add(index2);
+							}
 						}
 					}
 				}
-				if (j < numRows - 1) { // Bottom
-					index2 = calcIndex(j + 1, i);
-					if(cells.get(index2).isWalkway()) {
-						adjList.add(index2);
-					}
-					else if(cells.get(index2).isDoorway()) {
-						RoomCell c = (RoomCell) cells.get(index2);
-						if(c.getDoorDirection() == RoomCell.DoorDirection.UP) {
-							adjList.add(index2);
-						}
-					}
-				}
-				if (i > 0) { // Left
-					index2 = calcIndex(j, i - 1);
-					if(cells.get(index2).isWalkway()) {
-						adjList.add(index2);
-					}
-					else if(cells.get(index2).isDoorway()) {
-						RoomCell c = (RoomCell) cells.get(index2);
-						if(c.getDoorDirection() == RoomCell.DoorDirection.RIGHT) {
-							adjList.add(index2);
-						}
-					}
-				}
-				if (i < numColumns - 1) { // Right
-					index2 = calcIndex(j, i + 1);
-					if(cells.get(index2).isWalkway()) {
-						adjList.add(index2);
-					}
-					else if(cells.get(index2).isDoorway()) {
-						RoomCell c = (RoomCell) cells.get(index2);
-						if(c.getDoorDirection() == RoomCell.DoorDirection.LEFT) {
-							adjList.add(index2);
-						}
-					}
-					adjMtx.put(index, adjList);
-				}
+				adjMtx.put(index, adjList);
 			}
 		}
 	}
@@ -212,7 +214,7 @@ public class Board {
 	public void calcTargets(int cell, int steps) { // Calculate
 		targets = new HashSet<BoardCell>();
 		visited[cell] = true;
-		calcTargetsRecurse(cell, steps); //infinite recursion???
+		calcTargetsRecurse(cell, steps);
 		visited[cell] = false;
 	}
 	private void calcTargetsRecurse(int cell, int steps) {
@@ -223,10 +225,12 @@ public class Board {
 				adjacentCells.add(c);
 		for(int adjCell : adjacentCells) {
 			visited[adjCell] = true;
-			if(steps == 0)
+			if((steps == 0) || cells.get(adjCell).isDoorway()) {
 				targets.add(cells.get(adjCell));
-			else
-				calcTargets(adjCell, steps);
+			}
+			else {
+				calcTargetsRecurse(adjCell, steps);
+			}
 			visited[adjCell] = false;
 		}
 	}
