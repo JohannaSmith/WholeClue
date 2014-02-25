@@ -28,18 +28,18 @@ public class Board {
 	private String boardlayoutfile;
 	// Legend Reserved Words
 	public static final String WALKWAY_WORD = "Walkway";
-	public static final String ROOM_ENDING_WORD = "room";
+	public static final String NOTASPACE_WORD = "Not a Space";
 	// Constructor
 	public Board() {
 		super();
-		legendfile = "legend.csv";
+		legendfile = "legend.txt";
 		boardlayoutfile = "boardlayout.csv";
 		cells = new LinkedList<BoardCell>();
 		rooms = new HashMap<Character, String>();
 		numRowsSet = false;
 		numColumnsSet = false;
 	}
-	public Board(String legendfilename, String boardlayoutfilename) {
+	public Board(String boardlayoutfilename, String legendfilename) {
 		legendfile = legendfilename;
 		boardlayoutfile = boardlayoutfilename;
 		cells = new LinkedList<BoardCell>();
@@ -63,17 +63,22 @@ public class Board {
 	public void loadLegend() throws FileNotFoundException, BadConfigFormatException {
 		File f = new File(legendfile);
 		Scanner in = new Scanner(new BufferedReader(new FileReader(f)));
-		String line = in.nextLine();
-		String partone = line.substring(0, line.indexOf(","));
-		String parttwo = line.substring(line.indexOf(","));
-		if(partone.contains(",") || parttwo.contains(",")) {
-			in.close();
-			throw new BadConfigFormatException('l');
+		while(in.hasNextLine()) {
+			String line = in.nextLine();
+			String partone = line.substring(0, line.indexOf(","));
+			String parttwo = line.substring(line.indexOf(",") + 1);
+			if(parttwo.charAt(0) == ' ') { // Inconsistencies in Legend Formatting Fixed
+				parttwo = parttwo.substring(1);
+			}
+			if(partone.contains(",") || parttwo.contains(",")) {
+				in.close();
+				throw new BadConfigFormatException('l');
+			}
+			else {
+				rooms.put(partone.toCharArray()[0], parttwo);
+			}
 		}
-		else {
-			rooms.put(partone.toCharArray()[0], parttwo);
-			in.close();
-		}
+		in.close();
 	}
 	public void loadBoard() throws BadConfigFormatException, FileNotFoundException {
 		File f = new File(boardlayoutfile);
@@ -84,24 +89,30 @@ public class Board {
 				break;
 			String[] arr = line.split(",");
 			if(!numColumnsSet) {
-				numColumns = arr.length + 1;
+				numColumns = arr.length;
 				numColumnsSet = true;
 			}
 			else if(arr.length != numColumns) {
 				throw new BadConfigFormatException('c');
 			}
 			for(String s : arr) {
-				if(rooms.get(s).toLowerCase().equals(WALKWAY_WORD.toLowerCase())) { // Empty Cell
+				if(!rooms.containsKey(s.charAt(0))) {
+					throw new BadConfigFormatException('s');
+				}
+				if(rooms.get(s.charAt(0)).toLowerCase().equals(WALKWAY_WORD.toLowerCase())) { // Walkway Cell
 					cells.add(new WalkwayCell());
 				}
-				else if(rooms.get(s).toLowerCase().endsWith(ROOM_ENDING_WORD.toLowerCase())) { // Room
-					Character initial = s.toCharArray()[0];										//Not all of the rooms end in room
+				else if(rooms.get(s.charAt(0)).toLowerCase().equals(NOTASPACE_WORD.toLowerCase())) {
+					cells.add(new WalkwayCell());
+				}
+				else { // Room
+					Character initial = s.charAt(0);
 					RoomCell.DoorDirection direction;
 					if(s.length() == 1) {
 						direction = RoomCell.DoorDirection.NONE;
 					}
 					else {
-						switch(s.toCharArray()[1]) {
+						switch(s.charAt(1)) {
 						case 'R':
 							direction = RoomCell.DoorDirection.RIGHT;
 							break;
@@ -114,18 +125,19 @@ public class Board {
 						case 'D':
 							direction = RoomCell.DoorDirection.DOWN;
 							break;
+						case 'N':
+							// This looks intentional, so I am going to ignore it.
+							direction = RoomCell.DoorDirection.NONE;
+							break;
 						default:
 							throw new BadConfigFormatException('s');
 						}
 					}
 					cells.add(new RoomCell(initial, direction));
 				}
-				else { // Problem!!
-					throw new BadConfigFormatException('s');
-				}
 			}
 		} while(in.hasNextLine());
-		numRows = cells.size() / numColumns; //couldn't this just be numRows += 1 since numRows could potentially be larger than numColumns
+		numRows = cells.size() / numColumns;
 		numRowsSet = true;
 		visited = new boolean[getBoardSize()];
 		in.close();
@@ -202,7 +214,7 @@ public class Board {
 	public void calcTargets(int cell, int steps) { // Calculate
 		targets = new HashSet<BoardCell>();
 		visited[cell] = true;
-		calcTargets(cell, steps); //infinite recursion???
+		calcTargetsRecurse(cell, steps); //infinite recursion???
 		visited[cell] = false;
 	}
 	private void calcTargetsRecurse(int cell, int steps) {
@@ -239,7 +251,7 @@ public class Board {
 	public RoomCell getRoomCellAt(int r, int c) {
 		return (RoomCell) getCellAt(calcIndex(r, c));
 	}
-	public Map<Character, String> getRooms() {
+	public Map<Character,String> getRooms() {
 		return rooms;
 	}
 	public String getRoom(char c) {

@@ -8,11 +8,5 @@ K,Kitchen
 D,Dining Room
 O,Obervatory
 W,Walkway
-NA,Not a Space
+N,Not a Space
 X,Closet
-S1,Walkway
-S2,Walkway
-S3,Walkway
-S4,Walkway
-S5,Walkway
-S6,Walkway
