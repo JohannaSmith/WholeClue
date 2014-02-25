@@ -21,17 +21,19 @@ public class BoardTests {
 	}
 	@Test
 	public void checkLegendLoading() {
-		Assert.assertTrue(9 == board.getRoomCount());
-		Assert.assertTrue(board.getRoom('C') == "Conservatory");
-		Assert.assertTrue(board.getRoom('R') == "Billiard Room");
-		Assert.assertTrue(board.getRoom('S') == "Study");
-		Assert.assertTrue(board.getRoom('L') == "Library");
-		Assert.assertTrue(board.getRoom('H') == "Hall");
-		Assert.assertTrue(board.getRoom('B') == "Ballroom");
-		Assert.assertTrue(board.getRoom('K') == "Kitchen");
-		Assert.assertTrue(board.getRoom('D') == "Dining Room");
-		Assert.assertTrue(board.getRoom('O') == "Obervatory");
-		Assert.assertTrue(board.getRoom('X') == "Closet");
+		Assert.assertTrue(12 == board.getRoomCount());
+		Assert.assertTrue(board.getRoom('C').equals("Conservatory"));
+		Assert.assertTrue(board.getRoom('R').equals("Billiard Room"));
+		Assert.assertTrue(board.getRoom('S').equals("Study"));
+		Assert.assertTrue(board.getRoom('L').equals("Library"));
+		Assert.assertTrue(board.getRoom('H').equals("Hall"));
+		Assert.assertTrue(board.getRoom('B').equals("Ballroom"));
+		Assert.assertTrue(board.getRoom('K').equals("Kitchen"));
+		Assert.assertTrue(board.getRoom('D').equals("Dining Room"));
+		Assert.assertTrue(board.getRoom('O').equals("Observatory"));
+		Assert.assertTrue(board.getRoom('W').equals("Walkway"));
+		Assert.assertTrue(board.getRoom('N').equals("Not a Space"));
+		Assert.assertTrue(board.getRoom('X').equals("Closet"));
 	}
 	@Test
 	public void testBoardDimensions() {

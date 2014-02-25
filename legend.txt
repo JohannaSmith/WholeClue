@@ -6,7 +6,7 @@ H,Hall
 B,Ballroom
 K,Kitchen
 D,Dining Room
-O,Obervatory
+O,Observatory
 W,Walkway
 N,Not a Space
 X,Closet
