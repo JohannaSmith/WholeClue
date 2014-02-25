@@ -60,26 +60,26 @@ public class BoardAdjTargetTests {
 		Assert.assertTrue(testList.contains(board.calcIndex(4, 8)));
 		Assert.assertEquals(1, testList.size());
 		// From Outside Left Bottom Door
-		testList = board.getAdjList(board.calcIndex(8, 12));
-		Assert.assertTrue(testList.contains(board.calcIndex(7, 12)));
-		Assert.assertTrue(testList.contains(board.calcIndex(9, 12)));
-		Assert.assertTrue(testList.contains(board.calcIndex(8, 11)));
-		Assert.assertTrue(testList.contains(board.calcIndex(8, 13)));
+		testList = board.getAdjList(board.calcIndex(7, 12));
+		Assert.assertTrue(testList.contains(board.calcIndex(6, 12)));
+		Assert.assertTrue(testList.contains(board.calcIndex(8, 12)));
+		Assert.assertTrue(testList.contains(board.calcIndex(7, 11)));
+		Assert.assertTrue(testList.contains(board.calcIndex(7, 13)));
 		Assert.assertEquals(4, testList.size());
 		// From Inside Left Bottom Door
-		testList = board.getAdjList(board.calcIndex(7, 12));
-		Assert.assertTrue(testList.contains(board.calcIndex(8, 12)));
+		testList = board.getAdjList(board.calcIndex(6, 12));
+		Assert.assertTrue(testList.contains(board.calcIndex(7, 12)));
 		Assert.assertEquals(1, testList.size());
 		// From Outside Right Bottom Door
-		testList = board.getAdjList(board.calcIndex(8, 13));
-		Assert.assertTrue(testList.contains(board.calcIndex(7, 13)));
-		Assert.assertTrue(testList.contains(board.calcIndex(9, 13)));
-		Assert.assertTrue(testList.contains(board.calcIndex(8, 12)));
-		Assert.assertTrue(testList.contains(board.calcIndex(8, 14)));
+		testList = board.getAdjList(board.calcIndex(7, 13));
+		Assert.assertTrue(testList.contains(board.calcIndex(6, 13)));
+		Assert.assertTrue(testList.contains(board.calcIndex(8, 13)));
+		Assert.assertTrue(testList.contains(board.calcIndex(7, 12)));
+		Assert.assertTrue(testList.contains(board.calcIndex(7, 14)));
 		Assert.assertEquals(4, testList.size());
 		// From Inside Right Bottom Door
-		testList = board.getAdjList(board.calcIndex(7, 13));
-		Assert.assertTrue(testList.contains(board.calcIndex(8, 13)));
+		testList = board.getAdjList(board.calcIndex(6, 13));
+		Assert.assertTrue(testList.contains(board.calcIndex(7, 13)));
 		Assert.assertEquals(1, testList.size());
 		// Extra Test on Conservatory Corner
 		// From Right
@@ -90,10 +90,10 @@ public class BoardAdjTargetTests {
 		Assert.assertTrue(testList.contains(board.calcIndex(4, 7)));
 		Assert.assertEquals(4, testList.size());
 		// From Bottom
-		testList = board.getAdjList(board.calcIndex(4, 7));
-		Assert.assertTrue(testList.contains(board.calcIndex(4, 6)));
-		Assert.assertTrue(testList.contains(board.calcIndex(4, 8)));
-		Assert.assertTrue(testList.contains(board.calcIndex(5, 7)));
+		testList = board.getAdjList(board.calcIndex(4, 6));
+		Assert.assertTrue(testList.contains(board.calcIndex(5, 6)));
+		Assert.assertTrue(testList.contains(board.calcIndex(4, 5)));
+		Assert.assertTrue(testList.contains(board.calcIndex(4, 7)));
 		Assert.assertEquals(3, testList.size());
 	}
 	@Test
@@ -152,12 +152,12 @@ public class BoardAdjTargetTests {
 		// Distance 3
 		board.calcTargets(4, 1, 3);
 		targets = board.getTargets();
-		Assert.assertEquals(3, targets.size());
+		Assert.assertEquals(4, targets.size());
 		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(4, 4))));
 		// Distance 4
 		board.calcTargets(4, 1, 4);
 		targets = board.getTargets();
-		Assert.assertEquals(4, targets.size());
+		Assert.assertEquals(5, targets.size());
 		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(4, 5))));
 	}
 	@Test
@@ -179,8 +179,8 @@ public class BoardAdjTargetTests {
 		board.calcTargets(11, 3, 2);
 		Set<BoardCell> targets= board.getTargets();
 		Assert.assertEquals(2, targets.size());
-		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(12, 1))));
-		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(12, 5))));
+		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(12, 2))));
+		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(12, 4))));
 		// Right Door, one step
 		board.calcTargets(9, 6, 1);
 		targets = board.getTargets();

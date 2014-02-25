@@ -105,7 +105,7 @@ public class Board {
 					cells.add(new WalkwayCell());
 				}
 				else if(rooms.get(s.charAt(0)).toLowerCase().equals(NOTASPACE_WORD.toLowerCase())) {
-					cells.add(new WalkwayCell());
+					cells.add(new NotASpaceCell());
 				}
 				else { // Room
 					Character initial = s.charAt(0);
