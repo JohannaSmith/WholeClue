@@ -19,6 +19,8 @@ public class BoardAdjTargetTests {
 		board.calcAdjacencies();
 	}
 	@Test
+	// Test Adjacencies In Rooms
+	// Cells Tested are Orange
 	public void testAdjacenciesInRooms() {
 		// All tests use Library
 		// Top Left Corner
@@ -42,10 +44,13 @@ public class BoardAdjTargetTests {
 		testList = board.getAdjList(board.calcIndex(11, 0));
 		Assert.assertEquals(0, testList.size());
 		// Middle
-		testList = board.getAdjList(board.calcIndex(3, 10));
+		testList = board.getAdjList(board.calcIndex(10, 3));
 		Assert.assertEquals(0, testList.size());
 	}
 	@Test
+	// Test Doorways can be left
+	// Doorways tested in dark blue
+	// Outside cells tested in light blue
 	public void testAdjacencyDoorways() {
 		// All Tests on Billiard Room
 		// From Outside Left Door
@@ -97,6 +102,8 @@ public class BoardAdjTargetTests {
 		Assert.assertEquals(3, testList.size());
 	}
 	@Test
+	// Test Adjacencies at Board Edges
+	// Starting Cells in Red
 	public void testAdjacencyBoardEdge() {
 		// Left Edge
 		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(5, 0));
@@ -116,6 +123,8 @@ public class BoardAdjTargetTests {
 		Assert.assertEquals(1, testList.size());
 	}
 	@Test
+	// Walkway Tests
+	// Starting Cells in Green
 	public void testWalkwayAdjacency() {
 		// Test Random Square
 		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(4, 7));
@@ -138,6 +147,9 @@ public class BoardAdjTargetTests {
 		Assert.assertEquals(3, testList.size());
 	}
 	@Test
+	// Tests Target Distances
+	// Start Cell Green
+	// Checks to ensure red cells are included
 	public void testTargetDistances() {
 		// Distance 1
 		board.calcTargets(4, 1, 1);
@@ -161,6 +173,8 @@ public class BoardAdjTargetTests {
 		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(4, 5))));
 	}
 	@Test
+	// Test Doors can be targets
+	// Tested doors was right library door, in purple
 	public void testTargetsDoors() {
 		// Right Library Door
 		// One Step away
@@ -173,6 +187,8 @@ public class BoardAdjTargetTests {
 		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(4, 9))));			
 	}
 	@Test
+	// Targets from doorways
+	// Starting Cells in purple
 	public void testTargetsLeavingRoom() {
 		// Library
 		// Bottom Door, two steps
