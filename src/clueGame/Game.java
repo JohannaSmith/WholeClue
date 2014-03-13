@@ -1,8 +1,12 @@
 package clueGame;
 
+import java.util.ArrayList;
+
 public class Game {
 
 	private Board ourGameBoard;
+	private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<Card> deck = new ArrayList<Card>();
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
@@ -22,6 +26,16 @@ public class Game {
 	public boolean checkAccusation(Solution solution) {
 
 		return false;
+	}
+	
+	//getters for testing
+	public ArrayList<Card> getDeck() {
+		//return deck;
+		return new ArrayList<Card>();
+	}
+	public ArrayList<Player> getPlayers() {
+		//return players;
+		return new ArrayList<Player>();
 	}
 
 }
