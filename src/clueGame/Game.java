@@ -62,7 +62,7 @@ public class Game {
 			//Player p = new Player(ourPlayer, cell);
 			deck.add(new Card(ourPlayer, CardType.PERSON));
 			Player p;
-				if (ourPlayer.equals("Ms. Scarlet")) {
+				if (ourPlayer.equals("Miss Scarlet")) {
 					p = new HumanPlayer(ourPlayer, cell, convertColor(color));
 				}
 				else {
@@ -103,6 +103,10 @@ public class Game {
 	}
 	public ArrayList<Player> getPlayers() {
 		return players;
+	}
+	
+	public Board getGameBoard(){
+		return ourGameBoard;
 	}
 
 }

@@ -1,6 +1,7 @@
 package clueTests;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import junit.framework.Assert;
 
@@ -8,9 +9,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.Game;
+import clueGame.Player;
 
 public class GameSetupTests {
 	private static Game ourGame;
@@ -41,6 +44,15 @@ public class GameSetupTests {
 		color
 		starting location
 		*/
+		
+		Player human = ourGame.getPlayers().get(0);
+		String nameExpected = "Miss Scarlet";
+		Color colorExpected = Color.red;
+		BoardCell cellExpected = ourGame.getGameBoard().getCellAt(0,7);
+		
+		Assert.assertEquals(nameExpected, human.getMyName());
+		Assert.assertEquals(colorExpected, human.getMyColor());
+		Assert.assertEquals(cellExpected, human.getLocation());
 	}	
 	@Test
 	public void testComputer() {
@@ -53,6 +65,27 @@ public class GameSetupTests {
 		name
 		color
 		starting local*/
+		//Col. Mustard; yellow; (0,17)
+		
+		//First Computer Player
+		Player computer = ourGame.getPlayers().get(1);
+		String cNameExpected = "Mrs. Peacock";
+		Color cColorExpected = Color.blue;
+		BoardCell cCellExpected = ourGame.getGameBoard().getCellAt(5,0);
+		
+		Assert.assertEquals(cNameExpected, computer.getMyName());
+		Assert.assertEquals(cColorExpected, computer.getMyColor());
+		Assert.assertEquals(cCellExpected, computer.getLocation());
+		
+		//Second Computer Player
+		computer = ourGame.getPlayers().get(5);
+		cNameExpected = "Col. Mustard";
+		cColorExpected = Color.yellow;
+		cCellExpected = ourGame.getGameBoard().getCellAt(0, 17); 
+		
+		Assert.assertEquals(cNameExpected, computer.getMyName());
+		Assert.assertEquals(cColorExpected, computer.getMyColor());
+		Assert.assertEquals(cCellExpected, computer.getLocation());
 	}
 	
 	//testing the deck (parts directly influenced by loadConfigFiles)
@@ -114,6 +147,22 @@ public class GameSetupTests {
 	}
 	@Test
 	public void uniqueCards() { //check that no card is given out more than once
+		ArrayList<Player> players = ourGame.getPlayers();
+		ArrayList<Card> allCards = new ArrayList<Card>();
 		
+		for(Player p: players){
+			ArrayList<Card> playerCards = new ArrayList<Card>();
+			playerCards = p.getMyCards();
+			allCards.addAll(playerCards);
+		}
+		
+		for(int i = 0; i < allCards.size() - 1; i++){
+			for(int j = i+1; j < allCards.size(); j++){
+				Card current = allCards.get(i);
+				Card compare = allCards.get(j);				
+				Assert.assertFalse(current.equals(compare));
+			}
+			
+		}
 	}
 }
