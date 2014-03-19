@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 
 public class Game {
 
-	private Board ourGameBoard = new Board("./ourboardfiles/boardlayout.csv", "./ourboardfiles/lengend.txt");
+	private Board ourGameBoard = new Board();
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Card> deck = new ArrayList<Card>();
 	public Game() {
@@ -24,6 +24,7 @@ public class Game {
 	}
 	public void loadConfigFiles(String p, String w){
 		try{
+			ourGameBoard.loadConfigFiles();
 			loadPlayers(p);
 			loadWeapons(w);
 		} catch(BadConfigFormatException b) {
@@ -58,7 +59,6 @@ public class Game {
 			theSplit = local.split(",");
 			//System.out.println(theSplit[0] + " " + theSplit[1]);
 			cell = ourGameBoard.getCellAt(Integer.parseInt(theSplit[0]), Integer.parseInt(theSplit[1]));
-			System.out.println(cell);
 			//Player p = new Player(ourPlayer, cell);
 			deck.add(new Card(ourPlayer, CardType.PERSON));
 			Player p;
