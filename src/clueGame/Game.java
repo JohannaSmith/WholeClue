@@ -27,6 +27,7 @@ public class Game {
 			ourGameBoard.loadConfigFiles();
 			loadWeapons(w);
 			loadPlayers(p);
+			loadRooms();
 		} catch(BadConfigFormatException b) {
 			System.out.println("Bad config file. Please look at your config file and make sure you haven't ruined something.");
 		} catch(FileNotFoundException e) {
@@ -70,6 +71,17 @@ public class Game {
 		}
 		scan.close();
 	}
+	private void loadRooms() {
+		Card myCard;
+		for (char c: ourGameBoard.getRooms().keySet()) {
+			if(!(ourGameBoard.getRooms().get(c).equalsIgnoreCase("Closet") || 
+					ourGameBoard.getRooms().get(c).equalsIgnoreCase("Walkway") ||
+					ourGameBoard.getRooms().get(c).equalsIgnoreCase("Not a Space"))){
+				myCard = new Card(ourGameBoard.getRooms().get(c), CardType.ROOM);
+				deck.add(myCard);
+			}	
+		}
+	}
 	
 	public Color convertColor(String strColor) {
 		Color color; 
@@ -103,13 +115,4 @@ public class Game {
 		return players;
 	}
 	
-	public static void main(String[] arg) {
-		Game myGame = new Game();
-		myGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
-		System.out.println("deck size: " + myGame.getDeck().size());
-		for (Card c: myGame.getDeck()) {
-			System.out.println("card name: " + c.getName());
-		}
-	}
-
 }

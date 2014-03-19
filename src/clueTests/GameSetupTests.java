@@ -78,10 +78,10 @@ public class GameSetupTests {
 		Assert.assertEquals(expected, actual);
 		
 		//check deck contains specific room
-		/*c.setMyType(CardType.ROOM);
+		c.setMyType(CardType.ROOM);
 		c.setName("Kitchen");
-		actual = c.equals(ourGame.getDeck().get(18));
-		Assert.assertEquals(expected, actual);*/
+		actual = c.equals(ourGame.getDeck().get(20));
+		Assert.assertEquals(expected, actual);
 		
 	}
 	@Test
@@ -115,5 +115,12 @@ public class GameSetupTests {
 	@Test
 	public void uniqueCards() { //check that no card is given out more than once
 		
+	}
+	@Test
+	public void makeAccusation() { //check the validity of an accusation
+		//correct accusation
+		//incorrect room
+		//incorrect person
+		//incorrect weapon
 	}
 }
