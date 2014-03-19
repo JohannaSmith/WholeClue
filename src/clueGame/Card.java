@@ -2,10 +2,11 @@ package clueGame;
 
 public class Card {
 	private CardType myType;
-	private String name;
+	private String myName;
 	
-	public Card() {
-		//don't know if I actually need to write this constructor yet
+	public Card(String myName, CardType myType) {
+		this.myName = myName;
+		this.myType = myType;
 	}
 	
 	//TODO equals method
@@ -29,13 +30,9 @@ public class Card {
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String myName) {
+		this.myName = myName;
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

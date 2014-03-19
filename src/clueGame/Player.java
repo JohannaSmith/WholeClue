@@ -1,12 +1,10 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
-public class Player {
-	private String myName;
+public abstract class Player {
 	ArrayList<Card> myCards = new ArrayList<Card>();
-	
-	public Card disproveSuggestion(String person, String room, String weapon) {
-		return new Card();
-	}
+
+	public abstract Card disproveSuggestion(String person, String room, String weapon); 
 }

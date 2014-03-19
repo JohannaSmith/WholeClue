@@ -11,12 +11,12 @@ import clueGame.CardType;
 import clueGame.Game;
 
 public class GameSetupTests {
-	Game ourGame;
+	private static Game ourGame;
 	
 	@BeforeClass
-	public void setup() {
+	public static void setup() {
 		ourGame = new Game();
-		ourGame.loadConfigFiles();
+		ourGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
 	}
 	
 	@Before
