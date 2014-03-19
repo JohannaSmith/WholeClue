@@ -35,7 +35,7 @@ public class Game {
 		
 	}
 	private void loadWeapons(String weapons) throws BadConfigFormatException, FileNotFoundException { //possibly adjust
-		//BadConfigFormatException to account for weird shit
+		//BadConfigFormatException to account for weird shit in new config files
 		Scanner scan = new Scanner(new FileReader(weapons));
 		String thisWeapon;
 		while(scan.hasNextLine()) {
@@ -51,23 +51,21 @@ public class Game {
 		String[] theSplit = new String[3];
 		String ourPlayer, color, local;
 		BoardCell cell = new WalkwayCell();
+		Player p;
 		while(scan.hasNextLine()) {
 			theSplit = scan.nextLine().split(";");
 			ourPlayer = theSplit[0].trim();
 			color = theSplit[1].trim();
 			local = theSplit[2].replace('(', ' ').replace(')', ' ').trim();
 			theSplit = local.split(",");
-			//System.out.println(theSplit[0] + " " + theSplit[1]);
 			cell = ourGameBoard.getCellAt(Integer.parseInt(theSplit[0]), Integer.parseInt(theSplit[1]));
-			//Player p = new Player(ourPlayer, cell);
 			deck.add(new Card(ourPlayer, CardType.PERSON));
-			Player p;
-				if (ourPlayer.equals("Ms. Scarlet")) {
-					p = new HumanPlayer(ourPlayer, cell, convertColor(color));
-				}
-				else {
-					p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
-				}
+			if (ourPlayer.equals("Ms. Scarlet")) {
+				p = new HumanPlayer(ourPlayer, cell, convertColor(color));
+			}
+			else {
+				p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
+			}
 				players.add(p);
 		}
 		scan.close();
@@ -103,6 +101,15 @@ public class Game {
 	}
 	public ArrayList<Player> getPlayers() {
 		return players;
+	}
+	
+	public static void main(String[] arg) {
+		Game myGame = new Game();
+		myGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
+		System.out.println("deck size: " + myGame.getDeck().size());
+		for (Card c: myGame.getDeck()) {
+			System.out.println("card name: " + c.getName());
+		}
 	}
 
 }
