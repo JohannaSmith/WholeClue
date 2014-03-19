@@ -1,6 +1,6 @@
-Lead Pipe
+Wrench
 Rope
-Candlestick
 Revolver
+Candlestick
 Knife
-Pistol
+Lead Pipe
