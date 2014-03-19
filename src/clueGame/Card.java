@@ -9,13 +9,15 @@ public class Card {
 		this.myType = myType;
 	}
 	
-	//TODO equals method
+	public boolean equals(){
+		//TODO
+		return false;
+	}
 	
 	//getters and setters for testing purposes below
 	
 	public CardType getMyType() {
-		//return myType;
-		return CardType.PERSON; //stub
+		return myType; 
 	}
 
 
@@ -25,8 +27,7 @@ public class Card {
 
 
 	public String getName() {
-		//return name;
-		return ""; //null stub
+		return myName; 
 	}
 
 

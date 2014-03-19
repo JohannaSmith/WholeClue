@@ -25,8 +25,8 @@ public class Game {
 	public void loadConfigFiles(String p, String w){
 		try{
 			ourGameBoard.loadConfigFiles();
-			loadPlayers(p);
 			loadWeapons(w);
+			loadPlayers(p);
 		} catch(BadConfigFormatException b) {
 			System.out.println("Bad config file. Please look at your config file and make sure you haven't ruined something.");
 		} catch(FileNotFoundException e) {

@@ -66,29 +66,22 @@ public class GameSetupTests {
 	@Test
 	public void containsCards() {
 		//check deck contains specific weapon
+		Card c = new Card("Candlestick", CardType.WEAPON);
 		boolean expected = true;
-		boolean containsWeapon = false;
-		for(Card c: ourGame.getDeck()) {
-			if (c.getName().equals("Candlestick") && c.getMyType().equals(CardType.WEAPON))
-				containsWeapon = true;
-		}
-		Assert.assertEquals(expected, containsWeapon);
+		boolean actual = c.equals(ourGame.getDeck().get(3));
+		Assert.assertEquals(expected, actual);
 		
 		//check deck contains specific person
-		boolean containsPerson = false;
-		for(Card c: ourGame.getDeck()) {
-			if (c.getName().equals("Mrs. White") && c.getMyType().equals(CardType.PERSON))
-				containsPerson = true;
-		}
-		Assert.assertEquals(expected, containsPerson);
+		c.setMyType(CardType.PERSON);
+		c.setName("Mrs. White");
+		actual = c.equals(ourGame.getDeck().get(8));
+		Assert.assertEquals(expected, actual);
 		
 		//check deck contains specific room
-		boolean containsRoom = false;
-		for(Card c: ourGame.getDeck()) {
-			if (c.getName().equals("Kitchen") && c.getMyType().equals(CardType.ROOM))
-				containsRoom = true;
-		}
-		Assert.assertEquals(expected, containsRoom);
+		c.setMyType(CardType.ROOM);
+		c.setName("Kitchen");
+		actual = c.equals(ourGame.getDeck().get(18));
+		Assert.assertEquals(expected, actual);
 		
 	}
 	@Test
