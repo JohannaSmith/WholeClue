@@ -1,5 +1,7 @@
 package clueTests;
 
+import java.awt.Color;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
