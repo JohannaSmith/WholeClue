@@ -99,12 +99,10 @@ public class Game {
 	
 	//getters for testing
 	public ArrayList<Card> getDeck() {
-		//return deck;
-		return new ArrayList<Card>();
+		return deck;
 	}
 	public ArrayList<Player> getPlayers() {
-		//return players;
-		return new ArrayList<Player>();
+		return players;
 	}
 
 }

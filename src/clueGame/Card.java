@@ -9,7 +9,7 @@ public class Card {
 		this.myType = myType;
 	}
 	
-	public boolean equals(){
+	public boolean equals(Card c){
 		//TODO
 		return false;
 	}
