@@ -14,6 +14,7 @@ import clueGame.Card;
 import clueGame.CardType;
 import clueGame.Game;
 import clueGame.Player;
+import clueGame.Solution;
 
 public class GameSetupTests {
 	private static Game ourGame;
@@ -176,27 +177,21 @@ public class GameSetupTests {
 	public void makeAccusation() { //check the validity of an accusation
 		String room, weapon, person;
 		Player accusingPlayer;
-		boolean expected = true;
+		Solution solution = ourGame.getSolution();
 		
 		
 		//correct accusation
 		room = "Dining Room";
 		weapon = "Wrench";
 		person = "Miss Scarlet";
-		accusingPlayer = ourGame.getPlayers().get(0);
-		
-		ourGame.handleAccusation(room, weapon, person, accusingPlayer);
-		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
+		Assert.assertTrue(ourGame.checkAccusation(solution, room, weapon, person));
 		
 		//incorrect room
-		expected = false;
-		ourGame.handleAccusation("Kitchen", weapon, person, accusingPlayer);
-		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
+		Assert.assertFalse(ourGame.checkAccusation(solution, "Kitchen", weapon, person));
 		//incorrect person
-		ourGame.handleAccusation(room, weapon, "Col. Mustard", accusingPlayer);
-		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
+		Assert.assertFalse(ourGame.checkAccusation(solution, room, weapon, "Col. Mustard"));
 		//incorrect weapon
-		ourGame.handleAccusation(room, "Lead Pipe", person, accusingPlayer);
-		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
+		Assert.assertFalse(ourGame.checkAccusation(solution, room, "Lead Pipe" , person));
+		
 	}
 }
