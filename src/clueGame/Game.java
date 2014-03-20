@@ -32,9 +32,9 @@ public class Game {
 		
 		solution1 = new Solution(room, weapon, person);
 		
-		solution.add(deckClone.get(0)); //Weapon
-		solution.add(deckClone.get(6)); //Person
-		solution.add(deckClone.get(12));//Room
+		solution.add(deckClone.get(0)); //Weapon Wrench
+		solution.add(deckClone.get(6)); //Person Miss Scarlet
+		solution.add(deckClone.get(12));//Room Dining Room
 
 		deckClone.remove(0);
 		deckClone.remove(6);
@@ -134,6 +134,9 @@ public class Game {
 		return false;
 	}
 
+	public Solution getSolution(){
+		return solution1;
+	}
 	//getters for testing
 	public ArrayList<Card> getDeckClone() {
 		return deckClone;
