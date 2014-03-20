@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
-
 import java.lang.reflect.Field;
 
 
@@ -32,6 +32,7 @@ public class Game {
 		deckClone.remove(6);
 		deckClone.remove(12);
 		
+		Collections.shuffle(deckClone);
 		for(int i = 0 ; i < deckClone.size(); i++) {
 			if(deckClone.size() >= players.size()) {
 				for (Player p: players) {
