@@ -16,10 +16,21 @@ public abstract class Player {
 		this.myColor = myColor;
 	}
 
-	public abstract Card disproveSuggestion(String person, String room, String weapon); 
-	
-	/*public abstract boolean isHuman();
-	public abstract boolean isComputer();*/
+	public Card disproveSuggestion(String person, String room, String weapon){
+		
+		Card disprove = new Card(person, CardType.PERSON);
+		if(myCards.contains(disprove))
+			return disprove;
+		disprove = new Card(room, CardType.ROOM);
+		if(myCards.contains(disprove))
+			return disprove;
+		disprove = new Card(weapon, CardType.WEAPON);
+		if(myCards.contains(disprove))
+			return disprove;
+		else
+			return null;
+		
+	}
 	
 	public String getMyName() {
 		return myName;

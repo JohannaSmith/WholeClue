@@ -17,21 +17,29 @@ public class Game {
 	private ArrayList<Card> deck = new ArrayList<Card>();
 	private ArrayList<Card> deckClone;
 	private ArrayList<Card>	solution = new ArrayList<Card>();
+	Solution solution1;
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public void deal() {
 		deckClone = (ArrayList<Card>) deck.clone();
+
+		String person, weapon, room;
+		weapon = deckClone.get(0).getName();
+		person = deckClone.get(6).getName();
+		room = deckClone.get(12).getName();
 		
-		solution.add(deckClone.get(0));
-		solution.add(deckClone.get(6));
-		solution.add(deckClone.get(12));
+		solution1 = new Solution(room, weapon, person);
 		
+		solution.add(deckClone.get(0)); //Weapon
+		solution.add(deckClone.get(6)); //Person
+		solution.add(deckClone.get(12));//Room
+
 		deckClone.remove(0);
 		deckClone.remove(6);
 		deckClone.remove(12);
-		
+
 		Collections.shuffle(deckClone);
 		for(int i = 0 ; i < deckClone.size(); i++) {
 			if(deckClone.size() >= players.size()) {
@@ -41,7 +49,7 @@ public class Game {
 				}
 			}
 		}
-		
+
 	}
 	public void loadConfigFiles(String p, String w){
 		try{
@@ -54,7 +62,7 @@ public class Game {
 		} catch(FileNotFoundException e) {
 			System.out.println("File Not Found! Please make sure your files are accessible.");
 		}
-		
+
 	}
 	private void loadWeapons(String weapons) throws BadConfigFormatException, FileNotFoundException { //possibly adjust
 		//BadConfigFormatException to account for weird shit in new config files
@@ -83,20 +91,14 @@ public class Game {
 			cell = ourGameBoard.getCellAt(Integer.parseInt(theSplit[0]), Integer.parseInt(theSplit[1]));
 			deck.add(new Card(ourPlayer, CardType.PERSON));
 
-				if (ourPlayer.equals("Miss Scarlet")) {
-					p = new HumanPlayer(ourPlayer, cell, convertColor(color));
-				}
-				else {
-					p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
-				}
-
-			if (ourPlayer.equals("Ms. Scarlet")) {
+			if (ourPlayer.equals("Miss Scarlet")) {
 				p = new HumanPlayer(ourPlayer, cell, convertColor(color));
 			}
 			else {
 				p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
 			}
-				players.add(p);
+			
+			players.add(p);
 		}
 		scan.close();
 	}
@@ -111,7 +113,7 @@ public class Game {
 			}	
 		}
 	}
-	
+
 	public Color convertColor(String strColor) {
 		Color color; 
 		try {     
@@ -124,7 +126,7 @@ public class Game {
 		return color;
 	}
 
-	
+
 	public void selectAnswer() {
 		//what to put in the 'closet'
 	}
@@ -135,19 +137,19 @@ public class Game {
 
 		return false;
 	}
-	
+
 	//getters for testing
 	public ArrayList<Card> getDeckClone() {
 		return deckClone;
 	}
-	
+
 	public ArrayList<Card> getDeck() {
 		return deck;
 	}
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
-	
+
 
 	public Board getGameBoard(){
 		return ourGameBoard;

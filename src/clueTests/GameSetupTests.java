@@ -174,9 +174,27 @@ public class GameSetupTests {
 	}
 	@Test
 	public void makeAccusation() { //check the validity of an accusation
+		String room, weapon, person;
+		Player accusingPlayer;
+		boolean expected = true;
+		
+		
 		//correct accusation
+		room = "Dining Room";
+		weapon = "Wrench";
+		person = "Miss Scarlet";
+		accusingPlayer = ourGame.getPlayers().get(0);
+		
+		ourGame.handleAccusation(room, weapon, person, accusingPlayer);
+		Assert.assertEquals(expected, checkAccusation(
+		
 		//incorrect room
+		
+		ourGame.handleAccusation("Kitchen", weapon, person, accusingPlayer);
+		Assert.assertFalse()
 		//incorrect person
+		ourGame.handleAccusation(room, weapon, "Col. Mustard", accusingPlayer);
 		//incorrect weapon
+		ourGame.handleAccusation(room, "Lead Pipe", person, accusingPlayer);
 	}
 }
