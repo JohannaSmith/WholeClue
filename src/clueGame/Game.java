@@ -15,11 +15,31 @@ public class Game {
 	private Board ourGameBoard = new Board();
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Card> deck = new ArrayList<Card>();
+	private ArrayList<Card> deckClone;
+	private ArrayList<Card>	solution = new ArrayList<Card>();
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void deal() {
+		deckClone = (ArrayList<Card>) deck.clone();
+		
+		solution.add(deckClone.get(0));
+		solution.add(deckClone.get(6));
+		solution.add(deckClone.get(12));
+		
+		deckClone.remove(0);
+		deckClone.remove(6);
+		deckClone.remove(12);
+		
+		for(int i = 0 ; i < deckClone.size(); i++) {
+			if(deckClone.size() >= players.size()) {
+				for (Player p: players) {
+					p.getMyCards().add(deckClone.get(0));
+					deckClone.remove(0);
+				}
+			}
+		}
 		
 	}
 	public void loadConfigFiles(String p, String w){
@@ -108,6 +128,10 @@ public class Game {
 	}
 	
 	//getters for testing
+	public ArrayList<Card> getDeckClone() {
+		return deckClone;
+	}
+	
 	public ArrayList<Card> getDeck() {
 		return deck;
 	}

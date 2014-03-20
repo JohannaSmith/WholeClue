@@ -11,6 +11,7 @@ import org.junit.Test;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.Game;
+import clueGame.Player;
 
 public class GameSetupTests {
 	private static Game ourGame;
@@ -19,6 +20,7 @@ public class GameSetupTests {
 	public static void setup() {
 		ourGame = new Game();
 		ourGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
+		ourGame.deal();
 	}
 	
 	@Before
@@ -106,11 +108,17 @@ public class GameSetupTests {
 	}
 	@Test
 	public void allDelt() { // make sure all the cards got dealt
-		
+		int expected = 0;
+		int actual = ourGame.getDeckClone().size();
+		Assert.assertEquals(expected, actual);
 	}
 	@Test
 	public void evenSplit() { //check that each player has approximately the same number of cards
-		
+		int expected = 3;
+		for (Player p: ourGame.getPlayers()){
+			int actual = p.getMyCards().size();
+			Assert.assertEquals(expected, actual);
+		}
 	}
 	@Test
 	public void uniqueCards() { //check that no card is given out more than once
