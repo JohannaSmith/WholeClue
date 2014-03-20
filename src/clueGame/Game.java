@@ -124,10 +124,6 @@ public class Game {
 		return color;
 	}
 
-	
-	public void selectAnswer() {
-		//what to put in the 'closet'
-	}
 	public void handleAccusation(String room, String weapon, String person, Player accusingPlayer) {
 		
 	}
