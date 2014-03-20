@@ -186,15 +186,17 @@ public class GameSetupTests {
 		accusingPlayer = ourGame.getPlayers().get(0);
 		
 		ourGame.handleAccusation(room, weapon, person, accusingPlayer);
-		Assert.assertEquals(expected, checkAccusation(
+		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
 		
 		//incorrect room
-		
+		expected = false;
 		ourGame.handleAccusation("Kitchen", weapon, person, accusingPlayer);
-		Assert.assertFalse()
+		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
 		//incorrect person
 		ourGame.handleAccusation(room, weapon, "Col. Mustard", accusingPlayer);
+		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
 		//incorrect weapon
 		ourGame.handleAccusation(room, "Lead Pipe", person, accusingPlayer);
+		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
 	}
 }
