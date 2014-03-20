@@ -26,15 +26,11 @@ public class Game {
 		deckClone = (ArrayList<Card>) deck.clone();
 
 		String person, weapon, room;
-		weapon = deckClone.get(0).getName();
-		person = deckClone.get(6).getName();
-		room = deckClone.get(12).getName();
-		
+		weapon = deckClone.get(0).getName(); //Weapon Wrench
+		person = deckClone.get(6).getName(); //Person Miss Scarlet
+		room = deckClone.get(12).getName(); //Room Dining Room
+
 		solution1 = new Solution(room, weapon, person);
-		
-		solution.add(deckClone.get(0)); //Weapon Wrench
-		solution.add(deckClone.get(6)); //Person Miss Scarlet
-		solution.add(deckClone.get(12));//Room Dining Room
 
 		deckClone.remove(0);
 		deckClone.remove(6);
@@ -97,7 +93,7 @@ public class Game {
 			else {
 				p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
 			}
-			
+
 			players.add(p);
 		}
 		scan.close();
@@ -126,10 +122,15 @@ public class Game {
 		return color;
 	}
 
-	public void handleAccusation(String room, String weapon, String person, Player accusingPlayer) {
-		
-	}
-	public boolean checkAccusation(Solution solution) {
+	public boolean checkAccusation(Solution solution, String room, String weapon, String person) {
+
+		if(solution.getPerson().equals(person)){
+			if(solution.getRoom().equals(room)){
+				if(solution.getWeapon().equals(weapon)){
+					return true;
+				}
+			}
+		}
 
 		return false;
 	}

@@ -14,6 +14,7 @@ import clueGame.Card;
 import clueGame.CardType;
 import clueGame.Game;
 import clueGame.Player;
+import clueGame.Solution;
 
 public class GameSetupTests {
 	private static Game ourGame;
@@ -23,12 +24,6 @@ public class GameSetupTests {
 		ourGame = new Game();
 		ourGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
 		ourGame.deal();
-	}
-	
-	@Before
-	public void reset() {
-		//anything we need to reset before each test? 
-		//we shall see
 	}
 	
 	//test the people (part of config file testing)
@@ -57,16 +52,6 @@ public class GameSetupTests {
 	}	
 	@Test
 	public void testComputer() {
-		/*
-		check first ComputerPlayer from file
-		name
-		color
-		starting local
-		check last ComputerPlayer from file
-		name
-		color
-		starting local*/
-		//Col. Mustard; yellow; (0,17)
 		
 		//First Computer Player
 		Player computer = ourGame.getPlayers().get(1);
@@ -74,9 +59,9 @@ public class GameSetupTests {
 		Color cColorExpected = Color.blue;
 		BoardCell cCellExpected = ourGame.getGameBoard().getCellAt(5,0);
 		
-		Assert.assertEquals(cNameExpected, computer.getMyName());
-		Assert.assertEquals(cColorExpected, computer.getMyColor());
-		Assert.assertEquals(cCellExpected, computer.getLocation());
+		Assert.assertEquals(cNameExpected, computer.getMyName()); //check name
+		Assert.assertEquals(cColorExpected, computer.getMyColor()); //check color
+		Assert.assertEquals(cCellExpected, computer.getLocation()); //check location
 		
 		//Second Computer Player
 		computer = ourGame.getPlayers().get(5);
@@ -84,9 +69,9 @@ public class GameSetupTests {
 		cColorExpected = Color.yellow;
 		cCellExpected = ourGame.getGameBoard().getCellAt(0, 17); 
 		
-		Assert.assertEquals(cNameExpected, computer.getMyName());
-		Assert.assertEquals(cColorExpected, computer.getMyColor());
-		Assert.assertEquals(cCellExpected, computer.getLocation());
+		Assert.assertEquals(cNameExpected, computer.getMyName()); //check name
+		Assert.assertEquals(cColorExpected, computer.getMyColor()); //check color
+		Assert.assertEquals(cCellExpected, computer.getLocation()); //check location
 	}
 	
 	//testing the deck (parts directly influenced by loadConfigFiles)
@@ -173,26 +158,22 @@ public class GameSetupTests {
 	}
 	@Test
 	public void makeAccusation() { //check the validity of an accusation
+		String room, weapon, person;
+		Player accusingPlayer;
+		Solution solution = ourGame.getSolution();
+		
 		//correct accusation
+		room = "Dining Room";
+		weapon = "Wrench";
+		person = "Miss Scarlet";
+		Assert.assertTrue(ourGame.checkAccusation(solution, room, weapon, person));
 
-		String room = "Dining Room";
-		String weapon = "Wrench";
-		String person = "Miss Scarlet";
-		Player accusingPlayer = ourGame.getPlayers().get(0);
-		boolean expected = true;
-		
-		ourGame.handleAccusation(room, weapon, person, accusingPlayer);
-		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
-		
 		//incorrect room
-		expected = false;
-		ourGame.handleAccusation("Kitchen", weapon, person, accusingPlayer);
-		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
+		Assert.assertFalse(ourGame.checkAccusation(solution, "Kitchen", weapon, person));
 		//incorrect person
-		ourGame.handleAccusation(room, weapon, "Col. Mustard", accusingPlayer);
-		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
+		Assert.assertFalse(ourGame.checkAccusation(solution, room, weapon, "Col. Mustard"));
 		//incorrect weapon
-		ourGame.handleAccusation(room, "Lead Pipe", person, accusingPlayer);
-		Assert.assertEquals(expected, ourGame.checkAccusation(ourGame.getSolution()));
+		Assert.assertFalse(ourGame.checkAccusation(solution, room, "Lead Pipe" , person));
+		
 	}
 }
