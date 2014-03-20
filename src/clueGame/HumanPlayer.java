@@ -8,15 +8,6 @@ public class HumanPlayer extends Player{
 		
 	}
 
-	@Override
-	public Card disproveSuggestion(String person, String room, String weapon) {
-		return new Card("bob", CardType.PERSON);
-	}
 	
-	/*public boolean isHuman(){
-		return true;
-	}
-	public boolean isComputer(){
-		return false;
-	}*/
+	
 }

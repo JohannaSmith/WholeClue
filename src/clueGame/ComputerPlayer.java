@@ -19,18 +19,4 @@ public class ComputerPlayer extends Player{
 	public void updateSeen(Card seen) {
 		
 	}
-
-	@Override
-	public Card disproveSuggestion(String person, String room, String weapon) {
-		return new Card("bob", CardType.PERSON);
-	}
-	
-	/*public boolean isHuman(){
-		return false;
-	}
-	
-	public boolean isComputer(){
-		return true;
-	}*/
-
 }

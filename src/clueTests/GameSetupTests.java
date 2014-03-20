@@ -169,7 +169,6 @@ public class GameSetupTests {
 				Card compare = allCards.get(j);				
 				Assert.assertFalse(current.equals(compare));
 			}
-			
 		}
 	}
 	@Test
