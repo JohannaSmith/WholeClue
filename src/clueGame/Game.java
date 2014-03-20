@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
-
 import java.lang.reflect.Field;
 
 
@@ -15,11 +15,32 @@ public class Game {
 	private Board ourGameBoard = new Board();
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Card> deck = new ArrayList<Card>();
+	private ArrayList<Card> deckClone;
+	private ArrayList<Card>	solution = new ArrayList<Card>();
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void deal() {
+		deckClone = (ArrayList<Card>) deck.clone();
+		
+		solution.add(deckClone.get(0));
+		solution.add(deckClone.get(6));
+		solution.add(deckClone.get(12));
+		
+		deckClone.remove(0);
+		deckClone.remove(6);
+		deckClone.remove(12);
+		
+		Collections.shuffle(deckClone);
+		for(int i = 0 ; i < deckClone.size(); i++) {
+			if(deckClone.size() >= players.size()) {
+				for (Player p: players) {
+					p.getMyCards().add(deckClone.get(0));
+					deckClone.remove(0);
+				}
+			}
+		}
 		
 	}
 	public void loadConfigFiles(String p, String w){
@@ -27,6 +48,7 @@ public class Game {
 			ourGameBoard.loadConfigFiles();
 			loadWeapons(w);
 			loadPlayers(p);
+			loadRooms();
 		} catch(BadConfigFormatException b) {
 			System.out.println("Bad config file. Please look at your config file and make sure you haven't ruined something.");
 		} catch(FileNotFoundException e) {
@@ -35,7 +57,7 @@ public class Game {
 		
 	}
 	private void loadWeapons(String weapons) throws BadConfigFormatException, FileNotFoundException { //possibly adjust
-		//BadConfigFormatException to account for weird shit
+		//BadConfigFormatException to account for weird shit in new config files
 		Scanner scan = new Scanner(new FileReader(weapons));
 		String thisWeapon;
 		while(scan.hasNextLine()) {
@@ -51,26 +73,43 @@ public class Game {
 		String[] theSplit = new String[3];
 		String ourPlayer, color, local;
 		BoardCell cell = new WalkwayCell();
+		Player p;
 		while(scan.hasNextLine()) {
 			theSplit = scan.nextLine().split(";");
 			ourPlayer = theSplit[0].trim();
 			color = theSplit[1].trim();
 			local = theSplit[2].replace('(', ' ').replace(')', ' ').trim();
 			theSplit = local.split(",");
-			//System.out.println(theSplit[0] + " " + theSplit[1]);
 			cell = ourGameBoard.getCellAt(Integer.parseInt(theSplit[0]), Integer.parseInt(theSplit[1]));
-			//Player p = new Player(ourPlayer, cell);
 			deck.add(new Card(ourPlayer, CardType.PERSON));
-			Player p;
+
 				if (ourPlayer.equals("Miss Scarlet")) {
 					p = new HumanPlayer(ourPlayer, cell, convertColor(color));
 				}
 				else {
 					p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
 				}
+
+			if (ourPlayer.equals("Ms. Scarlet")) {
+				p = new HumanPlayer(ourPlayer, cell, convertColor(color));
+			}
+			else {
+				p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
+			}
 				players.add(p);
 		}
 		scan.close();
+	}
+	private void loadRooms() {
+		Card myCard;
+		for (char c: ourGameBoard.getRooms().keySet()) {
+			if(!(ourGameBoard.getRooms().get(c).equalsIgnoreCase("Closet") || 
+					ourGameBoard.getRooms().get(c).equalsIgnoreCase("Walkway") ||
+					ourGameBoard.getRooms().get(c).equalsIgnoreCase("Not a Space"))){
+				myCard = new Card(ourGameBoard.getRooms().get(c), CardType.ROOM);
+				deck.add(myCard);
+			}	
+		}
 	}
 	
 	public Color convertColor(String strColor) {
@@ -98,6 +137,10 @@ public class Game {
 	}
 	
 	//getters for testing
+	public ArrayList<Card> getDeckClone() {
+		return deckClone;
+	}
+	
 	public ArrayList<Card> getDeck() {
 		return deck;
 	}
@@ -105,6 +148,7 @@ public class Game {
 		return players;
 	}
 	
+
 	public Board getGameBoard(){
 		return ourGameBoard;
 	}

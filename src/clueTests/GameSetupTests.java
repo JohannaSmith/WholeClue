@@ -22,6 +22,7 @@ public class GameSetupTests {
 	public static void setup() {
 		ourGame = new Game();
 		ourGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
+		ourGame.deal();
 	}
 	
 	@Before
@@ -113,7 +114,7 @@ public class GameSetupTests {
 		//check deck contains specific room
 		c.setMyType(CardType.ROOM);
 		c.setName("Kitchen");
-		actual = c.equals(ourGame.getDeck().get(18));
+		actual = c.equals(ourGame.getDeck().get(20));
 		Assert.assertEquals(expected, actual);
 		
 	}
@@ -139,11 +140,17 @@ public class GameSetupTests {
 	}
 	@Test
 	public void allDelt() { // make sure all the cards got dealt
-		
+		int expected = 0;
+		int actual = ourGame.getDeckClone().size();
+		Assert.assertEquals(expected, actual);
 	}
 	@Test
 	public void evenSplit() { //check that each player has approximately the same number of cards
-		
+		int expected = 3;
+		for (Player p: ourGame.getPlayers()){
+			int actual = p.getMyCards().size();
+			Assert.assertEquals(expected, actual);
+		}
 	}
 	@Test
 	public void uniqueCards() { //check that no card is given out more than once
@@ -164,5 +171,12 @@ public class GameSetupTests {
 			}
 			
 		}
+	}
+	@Test
+	public void makeAccusation() { //check the validity of an accusation
+		//correct accusation
+		//incorrect room
+		//incorrect person
+		//incorrect weapon
 	}
 }

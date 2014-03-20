@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public abstract class Player {
+
 	private String myName;
 	private BoardCell location;
 	private Color myColor;

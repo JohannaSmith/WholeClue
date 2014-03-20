@@ -9,8 +9,9 @@ public class Card {
 		this.myType = myType;
 	}
 	
-	public boolean equals(Card c){
-		//TODO
+	public boolean equals(Card c){ //equals method compares each attribute
+		if(this.myName.equals(c.getName()) && this.myType.equals(c.getMyType()))
+			return true;
 		return false;
 	}
 	
