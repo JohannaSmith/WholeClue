@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public abstract class Player {
 
-	private String myName;
-	private BoardCell location;
-	private Color myColor;
-	ArrayList<Card> myCards = new ArrayList<Card>();
+	protected String myName;
+	protected BoardCell location;
+	protected Color myColor;
+	protected ArrayList<Card> myCards = new ArrayList<Card>();
 	
 	public Player(String myName, BoardCell location, Color myColor) {
 		this.myName = myName;
