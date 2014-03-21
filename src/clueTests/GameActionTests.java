@@ -32,11 +32,11 @@ public class GameActionTests {
 		ourGame.deal();
 	}
 	
-	@Test
+	@Test //Tests that the computer can make a valid suggestion based on the cards that it has 'seen' and the current room
 	public void computerSuggestion(){
+		//creates the player to be tested
 		RoomCell cPlayerLoc = new RoomCell('C', DoorDirection.RIGHT);
 		ComputerPlayer cPlayer = new ComputerPlayer("Miss Scarlet", cPlayerLoc, Color.RED);
-
 		String room = ourGame.getGameBoard().getRoom(cPlayerLoc.getInitial());
 		ArrayList<Card> deck = ourGame.getDeck();
 		
@@ -49,9 +49,9 @@ public class GameActionTests {
 		}
 		
 		//Only Possible Suggestion for Computer
-		Suggestion expected = new Suggestion("Miss Scarlet", "Wrench", "room");
+		Suggestion expected = new Suggestion("Miss Scarlet", "Wrench", room);
 		Suggestion actual = cPlayer.createSuggestion(room, ourGame.getDeck());
-		Assert.assertEquals(expected, actual);
+		Assert.assertTrue(expected.equals(actual));
 		
 		
 		
@@ -71,8 +71,10 @@ public class GameActionTests {
 		actual = cPlayer.createSuggestion(room, deck);
 		
 		//Test for the four possibilities of suggestions by individual field
-		Assert.assertEquals(room, actual.getRoom());
-		Assert.assertTrue(actual.getName().equals("Miss Scarlet") || actual.getName().equals("Mrs. Peacock"));
+		Assert.assertEquals(room, actual.getRoom());// Room should always equal the suggesting player's room
+		//the suggested name can be either of these two names
+		Assert.assertTrue(actual.getName().equals("Miss Scarlet") || actual.getName().equals("Mrs. Peacock")); 
+		//the suggested weapon can equal either of these two weapons
 		Assert.assertTrue(actual.getWeapon().equals("Wrench") || actual.getWeapon().equals("Rope"));
 		
 		
