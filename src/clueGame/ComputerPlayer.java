@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player{
@@ -13,11 +14,38 @@ public class ComputerPlayer extends Player{
 	public ComputerPlayer(String myName, BoardCell location, Color myColor) {
 		super(myName, location, myColor);
 		seenList = new ArrayList<Card>();
+		if(location.isRoom()){
+			lastRoomVisited = ((RoomCell) location).getInitial();
+		}
+		else
+			lastRoomVisited = 'X';
+			
 	}
 	
 	public BoardCell pickLocation(Set<BoardCell> targets) {
-		return new WalkwayCell();
 		// destination determined
+		for (BoardCell b: targets) {
+			if (b.isRoom()) {
+				if (((RoomCell) b).getInitial() != lastRoomVisited) { // checks to see if it was not already visited
+					destination = b;
+					break;
+				}
+				else {
+					//targets.remove(b);
+				}
+			}
+			else { // gets the random target
+				int item = new Random().nextInt(targets.size()); 
+				int i = 0;
+				for(BoardCell bc : targets)
+				{
+				    if (i == item)
+				        destination = bc;
+				    i++;
+				}
+			}
+		}
+		return destination;
 	}
 	
 	public Suggestion createSuggestion(String room, ArrayList<Card> deck) { 

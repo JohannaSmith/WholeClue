@@ -53,25 +53,27 @@ public class GameActionTests {
 	@Test
 	public void testNoReturnToRoom() {
 		// testing the computer selects a random walkway when they are coming from a room
-		ComputerPlayer computerTestPlayer = new ComputerPlayer("Name", ourGame.getGameBoard().getCellAt(ourGame.getGameBoard().calcIndex(6,3)), ourGame.convertColor("red"));
-		ourGame.getGameBoard().calcTargets(6, 3, 2);
-		int loc_7_2Count = 0;
-		int loc_7_4Count = 0;
-		int loc_8_3Count = 0;
+		ComputerPlayer computerTestPlayer = new ComputerPlayer("Name", ourGame.getGameBoard().getCellAt(ourGame.getGameBoard().calcIndex(3,6)), ourGame.convertColor("red"));
+		ourGame.getGameBoard().calcTargets(3, 6, 2);
+		BoardCell bc = ourGame.getGameBoard().getCellAt(3, 6);
+		System.out.println(((RoomCell) bc).getInitial());
+		int loc_2_7Count = 0;
+		int loc_4_7Count = 0;
+		int loc_3_8Count = 0;
 		BoardCell location;
 		// loops through multiple times to make sure the room just visited is not picked
 		for (int i = 0; i < 95; i++) {
 			location = computerTestPlayer.pickLocation(ourGame.getGameBoard().getTargets());
-			if (location == ourGame.getGameBoard().getCellAt(5, 1))
-				loc_7_2Count++;
-			else if (location == ourGame.getGameBoard().getCellAt(5, 2))
-				loc_7_4Count++;
-			else if (location == ourGame.getGameBoard().getCellAt(6, 1))
-				loc_8_3Count++;
+			if (location == ourGame.getGameBoard().getCellAt(2, 7))
+				loc_2_7Count++;
+			else if (location == ourGame.getGameBoard().getCellAt(4, 7))
+				loc_4_7Count++;
+			else if (location == ourGame.getGameBoard().getCellAt(3, 8))
+				loc_3_8Count++;
 			else
 				Assert.fail("Cannot go back into room");
 		}
-		Assert.assertEquals(95, loc_7_2Count + loc_7_4Count + loc_8_3Count);
+		Assert.assertEquals(95, loc_2_7Count + loc_4_7Count + loc_3_8Count);
 	}
 	
 	@Test
@@ -79,27 +81,24 @@ public class GameActionTests {
 		// testing the computer randomly selects a walkway when no room is a target
 		ComputerPlayer computerTestPlayer = (ComputerPlayer) ourGame.getPlayers().get(1);
 		ourGame.getGameBoard().calcTargets(5, 0, 2);
-		int loc_5_1Count = 0;
+		int loc_4_1Count = 0;
 		int loc_5_2Count = 0;
-		int loc_6_1Count = 0;
 		// Run the test 100 times to check for accuracy
 		for (int i=0; i<100; i++) {
 			BoardCell location = computerTestPlayer.pickLocation(ourGame.getGameBoard().getTargets());
-			if (location == ourGame.getGameBoard().getCellAt(5, 1))
-				loc_5_1Count++;
+			if (location == ourGame.getGameBoard().getCellAt(4, 1))
+				loc_4_1Count++;
 			else if (location == ourGame.getGameBoard().getCellAt(5, 2))
 				loc_5_2Count++;
-			else if (location == ourGame.getGameBoard().getCellAt(6, 1))
-				loc_6_1Count++;
 			else
 				Assert.fail("Invalid target selected");
 		}
-		// Ensures we have 100 total selections (fail should also ensure)
-		Assert.assertEquals(100, loc_5_1Count + loc_5_2Count + loc_6_1Count);
+		// Ensures we have 100 total selections (fail should also ensure this)
+		Assert.assertEquals(100, loc_4_1Count + loc_5_2Count);
 		// Ensures each target was selected more than once
-		Assert.assertTrue(loc_5_1Count > 10);
+		Assert.assertTrue(loc_4_1Count > 10);
 		Assert.assertTrue(loc_5_2Count > 10);
-		Assert.assertTrue(loc_6_1Count > 10);
+		
 	}
 	
 	@Test //Tests that the computer can make a valid suggestion based on the cards that it has 'seen' and the current room
