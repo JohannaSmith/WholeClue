@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 public abstract class Player {
 
+	//protected because it is more efficient to have both computerPlayers and HumanPlayers inherit these attributes
 	protected String myName;
 	protected BoardCell location;
 	protected Color myColor;
 	protected ArrayList<Card> myCards = new ArrayList<Card>();
+	protected ArrayList<Card> seenList = new ArrayList<Card>(); 
 	
 	public Player(String myName, BoardCell location, Color myColor) {
 		this.myName = myName;
@@ -17,7 +19,6 @@ public abstract class Player {
 	}
 
 	public Card disproveSuggestion(String person, String room, String weapon){
-		
 		Card disprove = new Card(person, CardType.PERSON);
 		if(myCards.contains(disprove))
 			return disprove;
@@ -31,6 +32,11 @@ public abstract class Player {
 			return null;
 		
 	}
+	
+	public void updateSeen(Card seen) {
+		seenList.add(seen);		
+	}
+
 	
 	public String getMyName() {
 		return myName;

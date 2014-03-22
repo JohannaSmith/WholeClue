@@ -8,10 +8,8 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player{
 	private char lastRoomVisited;
-	private ArrayList<Card> seenList;
 	public ComputerPlayer(String myName, BoardCell location, Color myColor) {
 		super(myName, location, myColor);
-		seenList = new ArrayList<Card>();
 	}
 	
 	public void pickLocation(Set<BoardCell> targets) {
@@ -38,7 +36,6 @@ public class ComputerPlayer extends Player{
 		
 		Collections.shuffle(possiblePersons);
 		Collections.shuffle(possibleWeapons);
-		
 		String person = possiblePersons.get(0).getName();
 		String weapon = possibleWeapons.get(0).getName();
 		
