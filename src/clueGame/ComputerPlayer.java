@@ -30,8 +30,15 @@ public class ComputerPlayer extends Player{
 					destination = b;
 					break;
 				}
-				else {
-					//targets.remove(b);
+				else { // gets the random target
+					int item = new Random().nextInt(targets.size()); 
+					int i = 0;
+					for(BoardCell bc : targets)
+					{
+					    if (i == item)
+					        destination = bc;
+					    i++;
+					}
 				}
 			}
 			else { // gets the random target

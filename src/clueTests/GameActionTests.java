@@ -55,25 +55,32 @@ public class GameActionTests {
 		// testing the computer selects a random walkway when they are coming from a room
 		ComputerPlayer computerTestPlayer = new ComputerPlayer("Name", ourGame.getGameBoard().getCellAt(ourGame.getGameBoard().calcIndex(3,6)), ourGame.convertColor("red"));
 		ourGame.getGameBoard().calcTargets(3, 6, 2);
-		BoardCell bc = ourGame.getGameBoard().getCellAt(3, 6);
-		System.out.println(((RoomCell) bc).getInitial());
 		int loc_2_7Count = 0;
 		int loc_4_7Count = 0;
 		int loc_3_8Count = 0;
+		int loc_5_6Count = 0;
+		int loc_4_5Count = 0;
 		BoardCell location;
 		// loops through multiple times to make sure the room just visited is not picked
-		for (int i = 0; i < 95; i++) {
+		for (int i = 0; i < 100; i++) {
 			location = computerTestPlayer.pickLocation(ourGame.getGameBoard().getTargets());
+			System.out.println(location.toString());
 			if (location == ourGame.getGameBoard().getCellAt(2, 7))
 				loc_2_7Count++;
 			else if (location == ourGame.getGameBoard().getCellAt(4, 7))
 				loc_4_7Count++;
 			else if (location == ourGame.getGameBoard().getCellAt(3, 8))
 				loc_3_8Count++;
-			else
+			else if (location == ourGame.getGameBoard().getCellAt(5, 6))
+				loc_5_6Count++;
+			else if (location == ourGame.getGameBoard().getCellAt(4, 5))
+				loc_4_5Count++;
+			else{
+				System.out.println(loc_2_7Count + loc_4_7Count + loc_3_8Count + loc_5_6Count + loc_4_5Count);
 				Assert.fail("Cannot go back into room");
+			}
 		}
-		Assert.assertEquals(95, loc_2_7Count + loc_4_7Count + loc_3_8Count);
+		Assert.assertEquals(100, loc_2_7Count + loc_4_7Count + loc_3_8Count + loc_5_6Count + loc_4_5Count);
 	}
 	
 	@Test
