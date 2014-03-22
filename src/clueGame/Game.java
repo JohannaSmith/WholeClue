@@ -18,6 +18,11 @@ public class Game {
 	private ArrayList<Card> deckClone;
 	private ArrayList<Card>	solution = new ArrayList<Card>();
 	Solution solution1;
+
+	private int locationCellX; // for game action tests
+	private int locationCellY; // for game action tests
+	private int numStepsMove; // for game action tests -- do we have a die?
+	
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
@@ -78,23 +83,34 @@ public class Game {
 		String ourPlayer, color, local;
 		BoardCell cell = new WalkwayCell();
 		Player p;
+		locationCellX = 0;
+		locationCellY = 0;
 		while(scan.hasNextLine()) {
+			numStepsMove = 5;
 			theSplit = scan.nextLine().split(";");
 			ourPlayer = theSplit[0].trim();
 			color = theSplit[1].trim();
 			local = theSplit[2].replace('(', ' ').replace(')', ' ').trim();
 			theSplit = local.split(",");
+			locationCellX = Integer.parseInt(theSplit[0]);
+			locationCellY = Integer.parseInt(theSplit[1]);
 			cell = ourGameBoard.getCellAt(Integer.parseInt(theSplit[0]), Integer.parseInt(theSplit[1]));
 			deck.add(new Card(ourPlayer, CardType.PERSON));
 
 			if (ourPlayer.equals("Miss Scarlet")) {
 				p = new HumanPlayer(ourPlayer, cell, convertColor(color));
+				players.add(p);
 			}
 			else {
-				p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
+				ComputerPlayer c = new ComputerPlayer(ourPlayer, cell, convertColor(color));
+			//	p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
+				ourGameBoard.calcAdjacencies();
+				ourGameBoard.calcTargets(Integer.parseInt(theSplit[0]), Integer.parseInt(theSplit[1]), numStepsMove);
+				c.pickLocation(ourGameBoard.getTargets());
+				players.add(c);
 			}
 
-			players.add(p);
+			//players.add(p);
 		}
 		scan.close();
 	}
@@ -153,6 +169,18 @@ public class Game {
 
 	public Board getGameBoard(){
 		return ourGameBoard;
+	}
+	
+	public int getNumStepsMove() {
+		return numStepsMove;
+	}
+
+	public int getLocationCellX() {
+		return locationCellX;
+	}
+
+	public int getLocationCellY() {
+		return locationCellY;
 	}
 
 }

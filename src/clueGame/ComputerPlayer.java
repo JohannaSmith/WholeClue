@@ -8,14 +8,16 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player{
 	private char lastRoomVisited;
+	private BoardCell destination;
 	private ArrayList<Card> seenList;
 	public ComputerPlayer(String myName, BoardCell location, Color myColor) {
 		super(myName, location, myColor);
 		seenList = new ArrayList<Card>();
 	}
 	
-	public void pickLocation(Set<BoardCell> targets) {
-	
+	public BoardCell pickLocation(Set<BoardCell> targets) {
+		return new WalkwayCell();
+		// destination determined
 	}
 	
 	public Suggestion createSuggestion(String room, ArrayList<Card> deck) { 
@@ -49,4 +51,5 @@ public class ComputerPlayer extends Player{
 	public void updateSeen(Card seen) {
 		seenList.add(seen);		
 	}
+	
 }
