@@ -29,17 +29,20 @@ public class GameActionTests {
 	private static Game ourGame;
 	private static Card mustardCard;
 	private static Card knifeCard;
-	private static Card ballroomCard;
+	private static Card wrenchCard;
+	private static Card scarletCard;
 
 	@BeforeClass
 	public static void setup() {
 		ourGame = new Game();
 		ourGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
-		ourGame.deal();
+		
 		//write a few new cards NOT added to the deck, but added to a player's cards in order to test disproving suggestions
 		mustardCard = new Card("Colonel Mustard", CardType.PERSON);
 		knifeCard = new Card("Knife", CardType.WEAPON);
-		ballroomCard = new Card ("Ballroom", CardType.ROOM);
+		scarletCard = new Card ("Miss Scarlet", CardType.PERSON);
+		wrenchCard = new Card("Wrench", CardType.WEAPON);
+		
 		// mustardCard and knifeCard are static variables, because @BeforeClass
 		// is static.  This allows me to set up the cards one time.
 		
@@ -96,31 +99,54 @@ public class GameActionTests {
 	//use a handleSuggestion method for all this?
 	@Test
 	public void cardShown() { //normal situation, card successfully returned
-		//clone Player's cards so that we don't have to run an @Before to reset before each test
 		Card expected = mustardCard;
-		Player p0 = new HumanPlayer("Mrs. Peacock",ourGame.getGameBoard().getCellAt(252), Color.BLUE);
-		p0.getMyCards().add(mustardCard);
-		Card actual = ourGame.handleSuggestion("Col. Mustard", "Candlestick", p0); 
+		ourGame.getPlayers().get(0).getMyCards().add(mustardCard);
+		Card actual = ourGame.handleSuggestion("Col. Mustard", "Candlestick", ourGame.getPlayers().get(1)); 
 		Assert.assertEquals(expected, actual);
 	}
 	@Test
 	public void multipleOptionsOnePlayer() { //if one player has multiple cards that could disprove, one is selected randomly
-		
+		Card expected0 = mustardCard;
+		Card expected1 = knifeCard;
+		Card notInSoln = new Card("notInSoln", CardType.WEAPON); //make sure it only returns one of the cards from the player that successfully disproves
+		ourGame.getPlayers().get(0).getMyCards().add(knifeCard);
+		ourGame.getPlayers().get(0).getMyCards().add(notInSoln);
+		Card actual = ourGame.handleSuggestion("Col. Mustard", "Knife", ourGame.getPlayers().get(2)); 
+		Assert.assertTrue(actual.equals(expected0) || actual.equals(expected1));
 	}
 	@Test
 	public void multiplePlayersCouldDisprove() { //if multiple players could disprove, still only one card is returned (from first player that can disprove)
-		
+		ourGame.getPlayers().get(0).getMyCards().remove(knifeCard);
+		ourGame.getPlayers().get(4).getMyCards().add(knifeCard);
+		Card expected = mustardCard;
+		Card actual = ourGame.handleSuggestion("Col. Mustard", "Knife", ourGame.getPlayers().get(2)); 
+		Assert.assertEquals(actual, expected);
 	}
 	@Test
 	public void allPlayersQueried() { //both first and last players are queried
-		
+		ourGame.getPlayers().get(4).getMyCards().remove(knifeCard);
+		ourGame.getPlayers().get(0).getMyCards().remove(mustardCard);
+		ourGame.getPlayers().get(5).getMyCards().add(mustardCard);
+		Card expected = mustardCard;
+		Card actual = ourGame.handleSuggestion("Col. Mustard", "Knife", ourGame.getPlayers().get(2)); 
+		Assert.assertEquals(actual, expected);
+		expected = knifeCard;
+		ourGame.getPlayers().get(0).getMyCards().add(mustardCard);
+		actual = ourGame.handleSuggestion("Col. Mustard", "Knife", ourGame.getPlayers().get(2));
 	}
 	@Test
 	public void suggestorHasOnlySolution() { //testing that the player who makes the suggestion is not queried (should return null)
-		//should I be cloning the arrayList of players and removing the suggestor?
+		Card expected = null;
+		ourGame.getPlayers().get(3).getMyCards().add(scarletCard);
+		Card actual = ourGame.handleSuggestion("Miss Scarlet", "Wrench", ourGame.getPlayers().get(3));;
+		Assert.assertEquals(expected, actual);
 	}
 	@Test
 	public void nullReturn() { //no player has a card to disprove
+		ourGame.getPlayers().get(3).getMyCards().remove(scarletCard);
+		Card expected = null;
+		Card actual = ourGame.handleSuggestion("Miss Scarlet", "Wrench", ourGame.getPlayers().get(3));
+		Assert.assertEquals(expected, actual);
 		
 	}
 
