@@ -137,6 +137,7 @@ public class Game {
 	
 	public Card handleSuggestion(String suggestPerson, String suggestWeapon, Player iSuggest) {
 		//not taking in a room because it HAS to be the room they're in so I will handle that here
+		
 		//use disproveSuggestion method that each player has for every player in the list except the one accusing
 		//handle a call to updateSeen for every player for any card that is shown
 		return new Card("Kitchen", CardType.ROOM); //random stub
