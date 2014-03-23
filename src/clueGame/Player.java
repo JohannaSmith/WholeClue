@@ -22,7 +22,24 @@ public abstract class Player {
 	}
 
 	public Card disproveSuggestion(String person, String room, String weapon){
+		
+		//Alternate Algorithm
+
 		ArrayList<Card> couldDisprove = new ArrayList<Card>();
+		
+		Card disprove0 = new Card(person, CardType.PERSON);
+		Card disprove1 = new Card(room, CardType.ROOM);
+		Card disprove2 = new Card(weapon, CardType.WEAPON);
+		
+		for(int i = 0; i < myCards.size(); i++){
+			if(myCards.get(i).equals(disprove0))
+				couldDisprove.add(disprove0);
+			else if(myCards.get(i).equals(disprove1))
+				couldDisprove.add(disprove1);
+			else if(myCards.get(i).equals(disprove2))
+				couldDisprove.add(disprove2);
+		}
+		/*
 		Card disprove0 = new Card(person, CardType.PERSON);
 		if(myCards.contains(disprove0))
 			couldDisprove.add(disprove0);
@@ -31,7 +48,8 @@ public abstract class Player {
 			couldDisprove.add(disprove1);
 		Card disprove2 = new Card(weapon, CardType.WEAPON);
 		if(myCards.contains(disprove2))
-			couldDisprove.add(disprove2);
+			couldDisprove.add(disprove2);*/
+		
 		if(couldDisprove.size() != 0) {
 			Collections.shuffle(couldDisprove);
 			return couldDisprove.get(0);

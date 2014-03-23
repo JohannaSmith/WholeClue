@@ -34,7 +34,7 @@ public class GameActionTests {
 		ourGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
 
 		//write a few new cards NOT added to the deck, but added to a player's cards in order to test disproving suggestions
-		mustardCard = new Card("Colonel Mustard", CardType.PERSON);
+		mustardCard = new Card("Col. Mustard", CardType.PERSON);
 		knifeCard = new Card("Knife", CardType.WEAPON);
 		scarletCard = new Card ("Miss Scarlet", CardType.PERSON);
 		wrenchCard = new Card("Wrench", CardType.WEAPON);
