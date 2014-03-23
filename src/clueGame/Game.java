@@ -157,12 +157,16 @@ public class Game {
 		//use disproveSuggestion method that each player has for every player in the list except the one accusing
 		for (Player p: askPlayers) {
 			if (p.disproveSuggestion(suggestPerson, suggestRoom, suggestWeapon) != null) {
-				System.out.println("this doesn't work, does it?");
+				//System.out.println("this doesn't work, does it?");
 				return p.disproveSuggestion(suggestPerson, suggestRoom, suggestWeapon);
 			}
 			//struggling with updateSeen so will fix that at some other point; not crucial right now
 		}
 		return null;	
+	}
+
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
 	}
 
 	public Solution getSolution(){

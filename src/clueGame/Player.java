@@ -12,8 +12,11 @@ public abstract class Player {
 	protected String myName;
 	protected BoardCell location;
 	protected Color myColor;
-	protected ArrayList<Card> myCards = new ArrayList<Card>();
+	public ArrayList<Card> myCards = new ArrayList<Card>(); //This is made public ONLY for the sake of the disprove suggestion test
 	protected ArrayList<Card> seenList = new ArrayList<Card>(); 
+	
+	//For Multiple Players disprove suggestion test (Test Purposes Only)
+	public Player(){}
 	
 	public Player(String myName, BoardCell location, Color myColor) {
 		this.myName = myName;

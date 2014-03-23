@@ -171,12 +171,54 @@ public class GameActionTests {
 	//DISPROVE SUGGESTIONS tests
 	//our own "deal" is necessary before these tests so that cards can be tested and are not randomly alloted
 	//use a handleSuggestion method for all this?
-	@Test
+	
+	
+	//Card shown is just what disproveSuggestion tests do
+	/*@Test
 	public void cardShown() { //normal situation, card successfully returned
 		Card expected = mustardCard;
 		ourGame.getPlayers().get(0).getMyCards().add(mustardCard);
 		Card actual = ourGame.handleSuggestion("Col. Mustard", "Ballroom", "Candlestick", ourGame.getPlayers().get(1)); 
-		Assert.assertEquals(expected, actual);
+		Assert.assertTrue(actual.equals(expected));
+	}*/
+	
+	
+	@Test
+	public void onePlayerOneCorrectMatch(){
+		
+		Card expected;
+		Card actual;
+		
+		//Sets up test player
+		Player player = new ComputerPlayer();
+		player.myCards.add(new Card("Col. Mustard", CardType.PERSON));
+		player.myCards.add(new Card("Prof Plum", CardType.PERSON));
+		player.myCards.add(new Card("Candlestick", CardType.WEAPON));
+		player.myCards.add(new Card("Wrench", CardType.WEAPON));
+		player.myCards.add(new Card("Conservatory", CardType.ROOM));
+		player.myCards.add(new Card("Ballroom", CardType.ROOM));
+		
+		
+		//The right PERSON is disproved
+		expected = mustardCard;
+		actual = player.disproveSuggestion("Col. Mustard", "Kitchen", "Rope");
+		Assert.assertTrue(actual.equals(expected));
+		
+		//The right ROOM is disproved
+		expected = ballroomCard;
+		actual = player.disproveSuggestion("Miss Scarlet", "Ballroom", "Rope");
+		Assert.assertTrue(actual.equals(expected));
+		
+		//The right Weapon is disproved
+		expected = wrenchCard;
+		actual = player.disproveSuggestion("Miss Scarlet", "Kitchen", "Wrench");
+		Assert.assertTrue(actual.equals(expected));
+		
+		//Null is returned
+		expected = null;
+		actual = player.disproveSuggestion("Miss Scarlet", "Kitchen", "Rope");
+		Assert.assertTrue(actual == null);
+		
 	}
 	@Test
 	public void multipleOptionsOnePlayer() { //if one player has multiple cards that could disprove, one is selected randomly
@@ -189,14 +231,77 @@ public class GameActionTests {
 		Assert.assertTrue(actual.equals(expected0) || actual.equals(expected1));
 	}
 	@Test
-	public void multiplePlayersCouldDisprove() { //if multiple players could disprove, still only one card is returned (from first player that can disprove)
-		ourGame.getPlayers().get(0).getMyCards().remove(knifeCard);
-		ourGame.getPlayers().get(4).getMyCards().add(knifeCard);
-		Card expected = mustardCard;
-		Card actual = ourGame.handleSuggestion("Col. Mustard", "Ballroom", "Knife", ourGame.getPlayers().get(2)); 
-		Assert.assertEquals(actual, expected);
+	public void allPlayersQueried() { //if multiple players could disprove, still only one card is returned (from first player that can disprove)
+		
+		//Setting up Player Elements
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new HumanPlayer());
+		for(int i = 0; i < 5; i++){
+			players.add(new ComputerPlayer());
+		}
+		
+		//Human Player
+		players.get(0).myCards.add(new Card("Prof Plum", CardType.PERSON ));
+		players.get(0).myCards.add(new Card("Candlestick", CardType.WEAPON));
+		
+		//Computer Player 1
+		players.get(1).myCards.add(new Card("Wrench", CardType.WEAPON));
+		players.get(1).myCards.add(new Card("Library", CardType.ROOM));
+		
+		//Computer Player 2
+		players.get(2).myCards.add(new Card("Mrs. White", CardType.PERSON));
+		players.get(2).myCards.add(new Card("Lead Pipe", CardType.WEAPON));
+		
+		//Computer Player 3
+		players.get(3).myCards.add(new Card("Rope", CardType.WEAPON));
+		players.get(3).myCards.add(new Card("Observatory", CardType.ROOM));
+		players.get(3).myCards.add(new Card("Col. Mustard", CardType.PERSON));
+		
+		//Computer Player 4
+		players.get(4).myCards.add(new Card("Mrs. Peacock", CardType.PERSON));
+		players.get(4).myCards.add(new Card("Kitchen", CardType.ROOM));
+		
+		//Computer Player 5
+		players.get(5).myCards.add(new Card("Revolver", CardType.WEAPON));
+		players.get(5).myCards.add(new Card("Mr. Green", CardType.PERSON));
+		
+		ourGame.setPlayers(players);		
+		
+		//No Players can disprove
+		Card expected = null;
+		Card actual = ourGame.handleSuggestion("Miss Scarlet", "Conservatory", "Knife", ourGame.getPlayers().get(2));
+		Assert.assertTrue(actual == null);
+		
+		//Only Human Can disprove
+		expected = players.get(0).myCards.get(0); // Sets expected to Human player's first card (Prof Plum)
+		actual = ourGame.handleSuggestion("Prof Plum", "Conservatory", "Knife", ourGame.getPlayers().get(2)); 
+		Assert.assertTrue(actual.equals(expected));
+		
+		//Only suggester can disprove the suggestion (Computer)
+		expected = null;
+		actual = ourGame.handleSuggestion("Mrs. White", "Ballroom", "Knife", ourGame.getPlayers().get(2));
+		Assert.assertTrue(actual == null);
+		
+		//Only suggester can disprove the suggestion (Human)
+		expected = null;
+		actual = ourGame.handleSuggestion("Prof Plum", "Conservatory", "Knife", ourGame.getPlayers().get(0));
+		Assert.assertTrue(actual == null);
+		
+		//Two Players can disprove
+		
+		//Player 5 and 6 can disprove (5 with Mrs. Peacock, 6 with Revolver)
+		expected = new Card("Mrs. Peacock", CardType.PERSON);
+		actual = ourGame.handleSuggestion("Mrs. Peacock", "Conservatory", "Revolver", ourGame.getPlayers().get(0)); //Player 5 and 6 can disprove
+		Assert.assertTrue(actual.equals(expected));
+		
+		//Only Player 6 can disprove (Last Player)
+		expected = new Card("Revolver", CardType.WEAPON);
+		actual = ourGame.handleSuggestion("Miss Scarlet", "Conservatory", "Revolver", ourGame.getPlayers().get(0));
+		Assert.assertTrue(actual.equals(expected));
+		
+		
 	}
-	@Test
+	/*@Test
 	public void allPlayersQueried() { //both first and last players are queried
 		ourGame.getPlayers().get(4).getMyCards().remove(knifeCard);
 		ourGame.getPlayers().get(0).getMyCards().remove(mustardCard);
@@ -207,8 +312,8 @@ public class GameActionTests {
 		expected = knifeCard;
 		ourGame.getPlayers().get(0).getMyCards().add(mustardCard);
 		actual = ourGame.handleSuggestion("Col. Mustard", "Ballroom", "Knife", ourGame.getPlayers().get(2));
-	}
-	@Test
+	}*/
+	/*@Test
 	public void suggestorHasOnlySolution() { //testing that the player who makes the suggestion is not queried (should return null)
 		Card expected = null;
 		ourGame.getPlayers().get(3).getMyCards().add(scarletCard);
@@ -222,7 +327,7 @@ public class GameActionTests {
 		Card actual = ourGame.handleSuggestion("Miss Scarlet", "Ballroom", "Wrench", ourGame.getPlayers().get(3));
 		Assert.assertEquals(expected, actual);
 
-	}
+	}*/
 
 
 }
