@@ -18,6 +18,11 @@ public class Game {
 	private ArrayList<Card> deckClone;
 	private ArrayList<Card>	solution = new ArrayList<Card>();
 	Solution solution1;
+
+	private int locationCellX; // for game action tests
+	private int locationCellY; // for game action tests
+	private int numStepsMove; // for game action tests -- do we have a die?
+
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
@@ -78,23 +83,34 @@ public class Game {
 		String ourPlayer, color, local;
 		BoardCell cell = new WalkwayCell();
 		Player p;
+		locationCellX = 0;
+		locationCellY = 0;
 		while(scan.hasNextLine()) {
+			numStepsMove = 5;
 			theSplit = scan.nextLine().split(";");
 			ourPlayer = theSplit[0].trim();
 			color = theSplit[1].trim();
 			local = theSplit[2].replace('(', ' ').replace(')', ' ').trim();
 			theSplit = local.split(",");
+			locationCellX = Integer.parseInt(theSplit[0]);
+			locationCellY = Integer.parseInt(theSplit[1]);
 			cell = ourGameBoard.getCellAt(Integer.parseInt(theSplit[0]), Integer.parseInt(theSplit[1]));
 			deck.add(new Card(ourPlayer, CardType.PERSON));
 
 			if (ourPlayer.equals("Miss Scarlet")) {
 				p = new HumanPlayer(ourPlayer, cell, convertColor(color));
+				players.add(p);
 			}
 			else {
-				p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
+				ComputerPlayer c = new ComputerPlayer(ourPlayer, cell, convertColor(color));
+				//	p = new ComputerPlayer(ourPlayer, cell, convertColor(color));
+				ourGameBoard.calcAdjacencies();
+				ourGameBoard.calcTargets(Integer.parseInt(theSplit[0]), Integer.parseInt(theSplit[1]), numStepsMove);
+				c.pickLocation(ourGameBoard.getTargets());
+				players.add(c);
 			}
 
-			players.add(p);
+			//players.add(p);
 		}
 		scan.close();
 	}
@@ -134,14 +150,19 @@ public class Game {
 
 		return false;
 	}
-	
-	public Card handleSuggestion(String suggestPerson, String suggestWeapon, Player iSuggest) {
-		//not taking in a room because it HAS to be the room they're in so I will handle that here
-		
+
+	public Card handleSuggestion(String suggestPerson, String suggestRoom, String suggestWeapon, Player iSuggest) {
+		ArrayList<Player> askPlayers = (ArrayList<Player>)players.clone();
+		askPlayers.remove(iSuggest);
 		//use disproveSuggestion method that each player has for every player in the list except the one accusing
-		//handle a call to updateSeen for every player for any card that is shown
-		return new Card("Kitchen", CardType.ROOM); //random stub
-		//in actuality, this method will return a card bc disproveSuggestion returns a card... or will it just add that card to seenList? questions questions
+		for (Player p: askPlayers) {
+			if (p.disproveSuggestion(suggestPerson, suggestRoom, suggestWeapon) != null) {
+				System.out.println("this doesn't work, does it?");
+				return p.disproveSuggestion(suggestPerson, suggestRoom, suggestWeapon);
+			}
+			//struggling with updateSeen so will fix that at some other point; not crucial right now
+		}
+		return null;	
 	}
 
 	public Solution getSolution(){
@@ -162,6 +183,18 @@ public class Game {
 
 	public Board getGameBoard(){
 		return ourGameBoard;
+	}
+
+	public int getNumStepsMove() {
+		return numStepsMove;
+	}
+
+	public int getLocationCellX() {
+		return locationCellX;
+	}
+
+	public int getLocationCellY() {
+		return locationCellY;
 	}
 
 }

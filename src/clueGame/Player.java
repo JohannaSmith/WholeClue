@@ -2,10 +2,13 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public abstract class Player {
 
+
 	//protected because it is more efficient to have both computerPlayers and HumanPlayers inherit these attributes
+
 	protected String myName;
 	protected BoardCell location;
 	protected Color myColor;
@@ -19,15 +22,20 @@ public abstract class Player {
 	}
 
 	public Card disproveSuggestion(String person, String room, String weapon){
-		Card disprove = new Card(person, CardType.PERSON);
-		if(myCards.contains(disprove))
-			return disprove;
-		disprove = new Card(room, CardType.ROOM);
-		if(myCards.contains(disprove))
-			return disprove;
-		disprove = new Card(weapon, CardType.WEAPON);
-		if(myCards.contains(disprove))
-			return disprove;
+		ArrayList<Card> couldDisprove = new ArrayList<Card>();
+		Card disprove0 = new Card(person, CardType.PERSON);
+		if(myCards.contains(disprove0))
+			couldDisprove.add(disprove0);
+		Card disprove1 = new Card(room, CardType.ROOM);
+		if(myCards.contains(disprove1))
+			couldDisprove.add(disprove1);
+		Card disprove2 = new Card(weapon, CardType.WEAPON);
+		if(myCards.contains(disprove2))
+			couldDisprove.add(disprove2);
+		if(couldDisprove.size() != 0) {
+			Collections.shuffle(couldDisprove);
+			return couldDisprove.get(0);
+		}
 		else
 			return null;
 		

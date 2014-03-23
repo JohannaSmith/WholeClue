@@ -3,13 +3,8 @@ package clueTests;
 import java.awt.Color;
 import java.util.ArrayList;
 
-
-
-
-
 import junit.framework.Assert;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,23 +26,100 @@ public class GameActionTests {
 	private static Card knifeCard;
 	private static Card wrenchCard;
 	private static Card scarletCard;
+	private static Card ballroomCard;
 
 	@BeforeClass
 	public static void setup() {
 		ourGame = new Game();
 		ourGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
-		
+
 		//write a few new cards NOT added to the deck, but added to a player's cards in order to test disproving suggestions
 		mustardCard = new Card("Colonel Mustard", CardType.PERSON);
 		knifeCard = new Card("Knife", CardType.WEAPON);
 		scarletCard = new Card ("Miss Scarlet", CardType.PERSON);
 		wrenchCard = new Card("Wrench", CardType.WEAPON);
-		
+		ballroomCard = new Card("Ballroom", CardType.ROOM);
+
 		// mustardCard and knifeCard are static variables, because @BeforeClass
 		// is static.  This allows me to set up the cards one time.
-		
+		ourGame.deal();
 	}
-	
+
+	@Test
+	public void testSelectTarget() {
+		//testing the destination will be a room
+		ComputerPlayer computerTestPlayer = (ComputerPlayer) ourGame.getPlayers().get(1); // possible hard coding
+		ourGame.getGameBoard().calcAdjacencies();
+		ourGame.getGameBoard().calcTargets(5, 0, 11);
+		int expected = 10;
+		int roomTestCount = 0;
+		BoardCell location = computerTestPlayer.pickLocation(ourGame.getGameBoard().getTargets());
+		// testing multiple times to make sure it wasn't a fluke
+		for (int i = 0; i < 10; i++) {
+			if (location.isRoom())
+				roomTestCount++;
+		}
+		int actual = roomTestCount;
+		Assert.assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testNoReturnToRoom() {
+		// testing the computer selects a random walkway when they are coming from a room
+		ComputerPlayer computerTestPlayer = new ComputerPlayer("Name", ourGame.getGameBoard().getCellAt(ourGame.getGameBoard().calcIndex(3,6)), ourGame.convertColor("red"));
+		ourGame.getGameBoard().calcTargets(3, 6, 2);
+		int loc_2_7Count = 0;
+		int loc_4_7Count = 0;
+		int loc_3_8Count = 0;
+		int loc_5_6Count = 0;
+		int loc_4_5Count = 0;
+		BoardCell location;
+		// loops through multiple times to make sure the room just visited is not picked
+		for (int i = 0; i < 100; i++) {
+			location = computerTestPlayer.pickLocation(ourGame.getGameBoard().getTargets());
+			if (location == ourGame.getGameBoard().getCellAt(2, 7))
+				loc_2_7Count++;
+			else if (location == ourGame.getGameBoard().getCellAt(4, 7))
+				loc_4_7Count++;
+			else if (location == ourGame.getGameBoard().getCellAt(3, 8))
+				loc_3_8Count++;
+			else if (location == ourGame.getGameBoard().getCellAt(5, 6))
+				loc_5_6Count++;
+			else if (location == ourGame.getGameBoard().getCellAt(4, 5))
+				loc_4_5Count++;
+			else{
+				System.out.println(loc_2_7Count + loc_4_7Count + loc_3_8Count + loc_5_6Count + loc_4_5Count);
+				Assert.fail("Cannot go back into room");
+			}
+		}
+		Assert.assertEquals(100, loc_2_7Count + loc_4_7Count + loc_3_8Count + loc_5_6Count + loc_4_5Count);
+	}
+
+	@Test
+	public void testTargetRandomSelection() {
+		// testing the computer randomly selects a walkway when no room is a target
+		ComputerPlayer computerTestPlayer = (ComputerPlayer) ourGame.getPlayers().get(1);
+		ourGame.getGameBoard().calcTargets(5, 0, 2);
+		int loc_4_1Count = 0;
+		int loc_5_2Count = 0;
+		// Run the test 100 times to check for accuracy
+		for (int i=0; i<100; i++) {
+			BoardCell location = computerTestPlayer.pickLocation(ourGame.getGameBoard().getTargets());
+			if (location == ourGame.getGameBoard().getCellAt(4, 1))
+				loc_4_1Count++;
+			else if (location == ourGame.getGameBoard().getCellAt(5, 2))
+				loc_5_2Count++;
+			else
+				Assert.fail("Invalid target selected");
+		}
+		// Ensures we have 100 total selections (fail should also ensure this)
+		Assert.assertEquals(100, loc_4_1Count + loc_5_2Count);
+		// Ensures each target was selected more than once
+		Assert.assertTrue(loc_4_1Count > 10);
+		Assert.assertTrue(loc_5_2Count > 10);
+
+	}
+
 	@Test //Tests that the computer can make a valid suggestion based on the cards that it has 'seen' and the current room
 	public void computerSuggestion(){
 		//creates the player to be tested
@@ -64,12 +136,11 @@ public class GameActionTests {
 			cPlayer.updateSeen(deck.get(i)); //Adds all person cards to seen except 'Miss Scarlet'
 		}
 
+
 		//Only Possible Suggestion for Computer
 		Suggestion expected = new Suggestion("Miss Scarlet", "Wrench", room);
 		Suggestion actual = cPlayer.createSuggestion(room, ourGame.getDeck());
 		Assert.assertTrue(expected.equals(actual));
-
-
 
 		//Four Different Possible Solutions with 1 Room
 		cPlayerLoc = new RoomCell('D', DoorDirection.UP);
@@ -86,14 +157,17 @@ public class GameActionTests {
 
 		actual = cPlayer.createSuggestion(room, deck);
 
+		actual = cPlayer.createSuggestion(room, deck);
+
 		//Test for the four possibilities of suggestions by individual field
 		Assert.assertEquals(room, actual.getRoom());// Room should always equal the suggesting player's room
 		//the suggested name can be either of these two names
 		Assert.assertTrue(actual.getName().equals("Miss Scarlet") || actual.getName().equals("Mrs. Peacock")); 
 		//the suggested weapon can equal either of these two weapons
 		Assert.assertTrue(actual.getWeapon().equals("Wrench") || actual.getWeapon().equals("Rope"));
+
 	}
-	
+
 	//DISPROVE SUGGESTIONS tests
 	//our own "deal" is necessary before these tests so that cards can be tested and are not randomly alloted
 	//use a handleSuggestion method for all this?
@@ -101,7 +175,7 @@ public class GameActionTests {
 	public void cardShown() { //normal situation, card successfully returned
 		Card expected = mustardCard;
 		ourGame.getPlayers().get(0).getMyCards().add(mustardCard);
-		Card actual = ourGame.handleSuggestion("Col. Mustard", "Candlestick", ourGame.getPlayers().get(1)); 
+		Card actual = ourGame.handleSuggestion("Col. Mustard", "Ballroom", "Candlestick", ourGame.getPlayers().get(1)); 
 		Assert.assertEquals(expected, actual);
 	}
 	@Test
@@ -111,7 +185,7 @@ public class GameActionTests {
 		Card notInSoln = new Card("notInSoln", CardType.WEAPON); //make sure it only returns one of the cards from the player that successfully disproves
 		ourGame.getPlayers().get(0).getMyCards().add(knifeCard);
 		ourGame.getPlayers().get(0).getMyCards().add(notInSoln);
-		Card actual = ourGame.handleSuggestion("Col. Mustard", "Knife", ourGame.getPlayers().get(2)); 
+		Card actual = ourGame.handleSuggestion("Col. Mustard", "Ballroom", "Knife", ourGame.getPlayers().get(2)); 
 		Assert.assertTrue(actual.equals(expected0) || actual.equals(expected1));
 	}
 	@Test
@@ -119,7 +193,7 @@ public class GameActionTests {
 		ourGame.getPlayers().get(0).getMyCards().remove(knifeCard);
 		ourGame.getPlayers().get(4).getMyCards().add(knifeCard);
 		Card expected = mustardCard;
-		Card actual = ourGame.handleSuggestion("Col. Mustard", "Knife", ourGame.getPlayers().get(2)); 
+		Card actual = ourGame.handleSuggestion("Col. Mustard", "Ballroom", "Knife", ourGame.getPlayers().get(2)); 
 		Assert.assertEquals(actual, expected);
 	}
 	@Test
@@ -128,26 +202,28 @@ public class GameActionTests {
 		ourGame.getPlayers().get(0).getMyCards().remove(mustardCard);
 		ourGame.getPlayers().get(5).getMyCards().add(mustardCard);
 		Card expected = mustardCard;
-		Card actual = ourGame.handleSuggestion("Col. Mustard", "Knife", ourGame.getPlayers().get(2)); 
-		Assert.assertEquals(actual, expected);
+		Card actual = ourGame.handleSuggestion("Col. Mustard", "Ballroom", "Knife", ourGame.getPlayers().get(2)); 
+		Assert.assertEquals(expected, actual);
 		expected = knifeCard;
 		ourGame.getPlayers().get(0).getMyCards().add(mustardCard);
-		actual = ourGame.handleSuggestion("Col. Mustard", "Knife", ourGame.getPlayers().get(2));
+		actual = ourGame.handleSuggestion("Col. Mustard", "Ballroom", "Knife", ourGame.getPlayers().get(2));
 	}
 	@Test
 	public void suggestorHasOnlySolution() { //testing that the player who makes the suggestion is not queried (should return null)
 		Card expected = null;
 		ourGame.getPlayers().get(3).getMyCards().add(scarletCard);
-		Card actual = ourGame.handleSuggestion("Miss Scarlet", "Wrench", ourGame.getPlayers().get(3));;
+		Card actual = ourGame.handleSuggestion("Miss Scarlet", "Ballroom", "Wrench", ourGame.getPlayers().get(3));;
 		Assert.assertEquals(expected, actual);
 	}
 	@Test
 	public void nullReturn() { //no player has a card to disprove
 		ourGame.getPlayers().get(3).getMyCards().remove(scarletCard);
 		Card expected = null;
-		Card actual = ourGame.handleSuggestion("Miss Scarlet", "Wrench", ourGame.getPlayers().get(3));
+		Card actual = ourGame.handleSuggestion("Miss Scarlet", "Ballroom", "Wrench", ourGame.getPlayers().get(3));
 		Assert.assertEquals(expected, actual);
-		
+
 	}
 
+
 }
+
