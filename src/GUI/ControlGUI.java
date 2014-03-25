@@ -19,6 +19,15 @@ public class ControlGUI extends JFrame{
 		add(whoseTurn, BorderLayout.NORTH);
 		GameAction gameAction = new GameAction();
 		add(gameAction, BorderLayout.WEST);
+		DiePanel dieP = new DiePanel();
+		add(dieP, BorderLayout.SOUTH);
+		GuessPanel guessP = new GuessPanel();
+		add(guessP, BorderLayout.CENTER);
+		GuessResultPanel guessResP = new GuessResultPanel();
+		add(guessResP, BorderLayout.CENTER);
+		
+		
+		
 		createLayout();	
 	}
 
