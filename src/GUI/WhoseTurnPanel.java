@@ -15,8 +15,8 @@ public class WhoseTurnPanel extends JPanel{
 		
 		JLabel label = new JLabel("Whose Turn");
 		whoseTurn = new JTextArea(1,15);
-		add(label);
-		add(whoseTurn);
+		add(label, BorderLayout.NORTH);
+		add(whoseTurn, BorderLayout.SOUTH);
 		
 	}
 
