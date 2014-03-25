@@ -1,4 +1,4 @@
-package GUI;
+package clueGame;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

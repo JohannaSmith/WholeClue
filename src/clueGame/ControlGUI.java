@@ -1,4 +1,4 @@
-package GUI;
+package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
 
 
 public class ControlGUI extends JFrame{

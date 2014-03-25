@@ -1,4 +1,4 @@
-package GUI;
+package clueGame;
 
 import java.awt.BorderLayout;
 
