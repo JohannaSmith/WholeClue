@@ -1,0 +1,472 @@
+commit 8741dbb6481d70c85e99416ddc0795dfe0a90d56
+Merge: 78cdb2c 199d28c
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Sat Mar 22 22:50:54 2014 -0600
+
+    merge and wrote handleSuggestion implementation. Still returning null due to faulty if statement. Pushing so that team can help me
+
+commit 78cdb2ca32eb2b4f9bc71a6a24977dbd54dd1951
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Sat Mar 22 20:17:34 2014 -0600
+
+    Need to commit to pull
+
+commit 42eb6a1439747688c1bb5b8f1ea45b8f599bd101
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Sat Mar 22 20:09:42 2014 -0600
+
+    all disproveSuggestions tests are now failing
+
+commit 1c1ccd2499386d7de0caabda0063ed0e5c84c54b
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Fri Mar 21 23:23:17 2014 -0600
+
+    cardShown is failing. This will be the basis for the other disproveSuggestion tests
+
+commit 199d28c56b1d8b2cbd261fef7768615a5e70b35c
+Author: khorn4 <khorn@mines.edu>
+Date:   Fri Mar 21 22:50:05 2014 -0600
+
+    Selecting Target tests passing (code from swap is messed up -- door directions were not considered when choosing a path)
+
+commit 2de7af97bfb30f57911f752867e8f477bec9e60c
+Author: khorn4 <khorn@mines.edu>
+Date:   Fri Mar 21 22:36:39 2014 -0600
+
+    Returning to room test not passing
+
+commit 2f6b94a6dba114c2322db48ee9c6129b9ac986e4
+Author: khorn4 <khorn@mines.edu>
+Date:   Fri Mar 21 19:29:08 2014 -0600
+
+    Fail tests for testing targets working
+
+commit 73a4e6fdd8098a304c2172c272fc719231b40f45
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Fri Mar 21 12:05:20 2014 -0600
+
+    officially committing git log so merge can occur
+
+commit 09df8aa40cd4e872d2d550bfc1495f0078e75cfc
+Author: nwinbush <nwinbush@mines.edu>
+Date:   Thu Mar 20 22:47:26 2014 -0600
+
+    Computer Suggestion tests are working
+
+commit 3df8f159384ca2df975e4504ca3280cb47deea11
+Author: nwinbush <nwinbush@mines.edu>
+Date:   Thu Mar 20 21:59:54 2014 -0600
+
+    Create Suggestion Player Test for Part 2 Fails without errors
+
+commit 813fa017f49dfed9480661c312dc1164360d0791
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Thu Mar 20 10:41:01 2014 -0600
+
+    log file now included
+
+commit b11f5b35e0b4128a3985254cd5de8109b9ce3a6d
+Merge: d097c61 ed1bb23
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Thu Mar 20 10:37:47 2014 -0600
+
+    tests all passing. Part1 complete.
+
+commit d097c612ec38b3dd683c06c8a578e42b9bdd8a43
+Merge: 289742d fc01aa7
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Thu Mar 20 10:32:19 2014 -0600
+
+    unimportant changes, going to pull Trey's
+
+commit ed1bb23fdb83a8156d3ded34b8272446a8014ece
+Author: nwinbush <nwinbush@mines.edu>
+Date:   Thu Mar 20 00:32:11 2014 -0600
+
+     All Clue Player Tests for Part 1 are working |Setup Tests|
+
+commit 289742d9fa78578b60c08365d9ac1120d95faf6b
+Merge: 4a095d4 8d6b569
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Thu Mar 20 00:04:43 2014 -0600
+
+    pointless commit so that I can merge and pull again. Minor mistake on my part, sorry
+
+commit fc01aa76a0f8b768180f8288547c1f125732a426
+Author: nwinbush <nwinbush@mines.edu>
+Date:   Wed Mar 19 23:58:31 2014 -0600
+
+    More developed accusation test, still not complete
+
+commit 4a095d45f0850ffc78fddaefd6efb45d0d64b7ba
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Wed Mar 19 23:54:10 2014 -0600
+
+    Minor changes
+
+commit 8d6b56947c1074c3c2ec49cfb63a52d74e9c2506
+Author: nwinbush <nwinbush@mines.edu>
+Date:   Wed Mar 19 23:52:18 2014 -0600
+
+    The accusation test is incomplete
+
+commit 83c614ee3e9e2dacc5f13fb8a83b6620abad1cba
+Merge: 7e74a15 018898f
+Author: nwinbush <nwinbush@mines.edu>
+Date:   Wed Mar 19 22:01:55 2014 -0600
+
+    Pulled from github and merged with Trey's Player files
+
+commit 018898f30d5abe1fd71d29f239a99be6bc8f0b41
+Author: khorn4 <khorn@mines.edu>
+Date:   Wed Mar 19 18:53:46 2014 -0600
+
+    deck is shuffled before going to players
+
+commit 021cd20823ae63dedf4443039b4c38d539cd18a6
+Author: khorn4 <khorn@mines.edu>
+Date:   Wed Mar 19 18:50:46 2014 -0600
+
+    Deal() working
+
+commit e96af088c15b9ea351f021f90b22fb452f41563e
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Wed Mar 19 15:29:55 2014 -0600
+
+    containsCards, numPlayers, totalCards, and cardTypeNums are all now passing(same basic functionality required for all of them, hence why they were done simulateously). I worked on containsCards and all the rest passed as a result
+
+commit 7e74a15dce33abf18d1b51fa8c9dc2a0d07e35e9
+Author: nwinbush <nwinbush@mines.edu>
+Date:   Wed Mar 19 15:25:50 2014 -0600
+
+    Player Tests are working, unique cards just needs a functioning deal method to continue evaluating
+
+commit 7e23a39ab4c9e04bc9558dac29d85a5e02b843a5
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Wed Mar 19 12:43:56 2014 -0600
+
+    Equals method written in Card class and containsCard test working for all Cards that are created (weapons and character cards). Room Cards not created yet.
+
+commit d2b3c89b02f8c6db95ba9ab3d1a027d3483e8a84
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Wed Mar 19 01:28:51 2014 -0600
+
+    Now returning correct arrayLists instead of stubs, getNumPlayers now passing--> was written earlier
+
+commit 86b6961fa76ffd62954ee2724d83c9714084083c
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Wed Mar 19 01:23:48 2014 -0600
+
+    Totally forgot I had an equals method in the card class, so I had to rewrite my containsCards fail test. Now failing by the correct approach
+
+commit 000327f53c9b4671d7001ff7a7d876060da24f9d
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Wed Mar 19 01:02:33 2014 -0600
+
+    containsCards is now a failing test/ fail test has been written
+
+commit af39f4945e4566c0de45bcabff39496025553794
+Merge: a20015c 05f34f2
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Wed Mar 19 00:37:19 2014 -0600
+
+    Accepted changed character and weapons files as new
+
+commit a20015ce7715ddc3b24171fe337ea23f5c563df1
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Wed Mar 19 00:34:04 2014 -0600
+
+    adding character and weapons text files to be read in? Apparently they're not already there
+
+commit 05f34f2d3ff5ce3aaa9c47af3ee6177aa7a7b24f
+Author: khorn4 <khorn@mines.edu>
+Date:   Tue Mar 18 19:56:13 2014 -0600
+
+    (Not for grading purposes): partner split up -- work from here
+
+commit cabe8ea02b1c7d438ab5577bf1d4681905870fa1
+Author: khorn4 <khorn@mines.edu>
+Date:   Tue Mar 18 19:22:59 2014 -0600
+
+    files added and game class setup correct. ignore commit for checking the fail tests
+
+commit ab1c8317f35db5afa7a26acd5f849ab49228b004
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Tue Mar 18 18:54:00 2014 -0600
+
+    pushing in spite of not working completely because timing is weird... good luck.
+
+commit 5f9daff0dd234ad2efa10da7bf1353621e274784
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Tue Mar 18 16:35:50 2014 -0600
+
+    indexed excel board layout
+
+commit ebfc84d38f6e40b7a2cfd7c3aba62bd4bc3665d2
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Thu Mar 13 02:49:53 2014 -0600
+
+    forgot to stage the files I actually changed during the last commit. Apply last commit message now.
+
+commit 0251f22a65ea530a0784bb4cf5a575a0b6981501
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Thu Mar 13 02:37:29 2014 -0600
+
+    all stubs written for setup fail tests. Some implementation written
+
+commit 180a6d9fce205d2f0eff4146347fe3a99b8bbef6
+Author: Johanna Smith <jojsmith@mymail.mines.edu>
+Date:   Wed Mar 12 23:02:09 2014 -0600
+
+    Stubs for all methods and classes
+
+commit 6edeb3eca3919cfbce684d1bbc9b8c725fc1acab
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 27 10:20:03 2014 -0700
+
+    Spreadsheet Actually Added
+
+commit 75912403d9ba7726b03007fb3d5e7e710f875f9e
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 27 10:17:27 2014 -0700
+
+    Spreadsheet Added
+
+commit c4e75ef87241a408f9e0db39cb391d457fcad8d4
+Author: unknown <jwakefie@MZ026-20.adit.mines.edu>
+Date:   Tue Feb 25 10:35:56 2014 -0700
+
+    Fixed incorrect tests
+
+commit 42bf494568d77c677bc5e7a5b458af627b064483
+Author: unknown <jwakefie@MZ026-20.adit.mines.edu>
+Date:   Tue Feb 25 10:17:16 2014 -0700
+
+    All tests except our board adj tests working
+
+commit 7800c7b46caa80348ca855dcb8004c5c4063b0c8
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Tue Feb 25 09:42:28 2014 -0700
+
+    fixed the load of her setup
+
+commit a66aff4bddfc3ee7aef602d4a54d964bddac3177
+Author: unknown <jwakefie@CT156-33.adit.mines.edu>
+Date:   Mon Feb 24 18:59:52 2014 -0700
+
+    Failing tests added
+
+commit 1e4bc132045bdd76edb943db588fbf81d8b1baea
+Author: unknown <jwakefie@CT156-33.adit.mines.edu>
+Date:   Mon Feb 24 18:14:27 2014 -0700
+
+    Empty part3 test file added
+
+commit 9ce97f59c7fcd9a46fdc0a8ead3969e1bf4107c6
+Merge: 6b47ec8 19fc70b
+Author: unknown <jwakefie@CT156-33.adit.mines.edu>
+Date:   Mon Feb 24 18:11:04 2014 -0700
+
+    Merge branch 'boardpart2' of https://github.com/johnwakefield/Clue into boardpart2
+
+commit 6b47ec822b4382af74f8c956baf90f42e38fdb7d
+Author: unknown <jwakefie@CT156-33.adit.mines.edu>
+Date:   Mon Feb 24 18:10:45 2014 -0700
+
+    More tests added
+
+commit 19fc70b1712b05508a06cbbf5a10b27350964395
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Mon Feb 24 18:03:58 2014 -0700
+
+    finished room initail and door direction tests
+
+commit 66523a7db46ef23d134d9a731f3d92c21233d0e8
+Author: unknown <jwakefie@CT156-33.adit.mines.edu>
+Date:   Mon Feb 24 17:39:02 2014 -0700
+
+    Moved config files
+
+commit d5d32b7aab3be898a473808b5d46daa7d22997d0
+Author: unknown <jwakefie@CT156-33.adit.mines.edu>
+Date:   Mon Feb 24 17:38:40 2014 -0700
+
+    Moved config files
+
+commit 2c889c9e4ab4e10d92b5b46f37519472a41c5740
+Author: unknown <jwakefie@CT156-33.adit.mines.edu>
+Date:   Mon Feb 24 17:35:01 2014 -0700
+
+    Minor Refactoring
+
+commit db2270f0c62fe0ca6f657e9b56008e984cb3cfbc
+Author: unknown <jwakefie@CT156-33.adit.mines.edu>
+Date:   Mon Feb 24 17:33:46 2014 -0700
+
+    Our first set of tests working
+
+commit c4de9c63df6dc11fbf8c1c0b42b20af3aa940db0
+Author: unknown <jwakefie@CT156-33.adit.mines.edu>
+Date:   Mon Feb 24 17:22:40 2014 -0700
+
+    First set of her tests working.
+
+commit 7878c053ff862274859337a9d1e864c71c8afded
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Mon Feb 24 16:25:44 2014 -0700
+
+    Modified numColumns
+
+commit 334eae247696415772d9177fb4fdfde6ef4f5890
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Mon Feb 24 16:21:01 2014 -0700
+
+    added comments
+
+commit dc14c31a867225f8e589d9a44995ad9ef06dad79
+Author: unknown <jwakefie@CT156-21.adit.mines.edu>
+Date:   Sun Feb 23 23:53:21 2014 -0700
+
+    Compiles, ready to fix tests.
+
+commit 8ebdc3303f3a11b124f94094ee67580fab8f81d5
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Sun Feb 23 23:28:48 2014 -0700
+
+    Modified RoomCell DoorDirection
+
+commit d5babd533677790c6698c34c6a31833ab77f445f
+Author: unknown <jwakefie@CT156-21.adit.mines.edu>
+Date:   Sun Feb 23 22:21:52 2014 -0700
+
+    givenfilesadded
+
+commit dc39150de9f686f6d508d564d59bea4624602a4f
+Merge: 81ce453 a3ae5ad
+Author: unknown <jwakefie@CT152-11.adit.mines.edu>
+Date:   Thu Feb 20 18:19:37 2014 -0700
+
+    Merge conflict resolved.
+
+commit a3ae5ad5b1528b6a058b098ced0b9e8344f93fee
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 20 18:17:52 2014 -0700
+
+    updated testBoardDimensions
+
+commit f26f1007644e487a53d7157337d4897366c0ec46
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 20 18:17:13 2014 -0700
+
+    updated testBoardDimensions
+
+commit 81ce4535560974859f92f763ab26acad33260c01
+Author: unknown <jwakefie@CT152-11.adit.mines.edu>
+Date:   Thu Feb 20 18:13:36 2014 -0700
+
+    Legend tests
+
+commit 0bf8bbfdb5292f2fca11e586eff6050af9e8957e
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 20 17:54:27 2014 -0700
+
+    added test class
+
+commit c4e3caf169392a476fecb46dbb2da14626417b7b
+Merge: aa6e5e5 5d7483b
+Author: unknown <jwakefie@CT152-11.adit.mines.edu>
+Date:   Thu Feb 20 17:53:02 2014 -0700
+
+    Merge branch 'master' of https://github.com/johnwakefield/Clue
+
+commit aa6e5e52d3dd73439cd99f29b6c1751deef1b6c8
+Author: unknown <jwakefie@CT152-11.adit.mines.edu>
+Date:   Thu Feb 20 17:52:45 2014 -0700
+
+    Board stub and exception class added
+
+commit 5d7483b558b4e944fd74ce626c74767d27b4f58a
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 20 17:52:15 2014 -0700
+
+    updated classes for BoardCell and children
+
+commit 7c17c65936a4800aa706bbf94a9beb2036c43970
+Author: unknown <jwakefie@CT152-11.adit.mines.edu>
+Date:   Thu Feb 20 17:21:10 2014 -0700
+
+    Template for Clue Board
+
+commit 988f5f9c0aee262e558545221fb615b9838b117c
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 20 17:08:39 2014 -0700
+
+    added spreadsheet map
+
+commit 2e8555608c5928586b282c9bdae38f910019bc19
+Author: unknown <jwakefie@CT152-11.adit.mines.edu>
+Date:   Thu Feb 20 17:05:30 2014 -0700
+
+    Organizational changes for clue board
+
+commit 7a92b4019ae22812654dbf4d1f9d9cf062b2751d
+Author: unknown <jwakefie@CT152-11.adit.mines.edu>
+Date:   Thu Feb 20 16:54:17 2014 -0700
+
+    Merged and tested, cluepaths complete
+
+commit 8f1eab3b4416cccc786d52563e7f915dffc520fe
+Merge: 204dd47 18ec8d1
+Author: unknown <jwakefie@CT152-11.adit.mines.edu>
+Date:   Thu Feb 20 16:12:36 2014 -0700
+
+    Merge branch 'targets'
+
+commit 204dd47a0b4b00cb58c9468bf77509d63194a4bd
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 20 16:11:37 2014 -0700
+
+    Modified calcAdjacencies method
+
+commit 18ec8d1f302f47926f0d93d3b90e20bad68dabcd
+Author: unknown <jwakefie@CT152-11.adit.mines.edu>
+Date:   Thu Feb 20 16:05:24 2014 -0700
+
+    target algoithm written, waiting for adjacency
+
+commit 35c896b70db76d16a23a6660bc675521a6667e8d
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 20 15:55:59 2014 -0700
+
+    Modified calcAdjacencies method
+
+commit fbc99ff71bb14901882bfe0598057117554b0e17
+Merge: e9a6b6f 4bb5d54
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 20 15:32:24 2014 -0700
+
+    Merge branch 'master' of https://github.com/johnwakefield/Clue
+
+commit e9a6b6f2a6bf1e301d2733f32f749372728bfc7f
+Author: Charles Tandy <ctandy@mymail.mines.edu>
+Date:   Thu Feb 20 15:31:31 2014 -0700
+
+    Modified calcAdjacencies method
+
+commit 4bb5d54a8b5219887c1a0067b6dd1ed960438398
+Author: johnwakefield <jwakefie@mines.edu>
+Date:   Thu Feb 20 15:29:11 2014 -0700
+
+    Delete LICENSE
+
+commit e4a83f9250034f29970d8a2b668df1ac6fb624a5
+Author: unknown <jwakefie@MZ026-20.adit.mines.edu>
+Date:   Thu Feb 20 10:29:07 2014 -0700
+
+    Paths Added
+
+commit 224b01e615e2af608e1e81029cb4233a02c89b2d
+Author: johnwakefield <jwakefie@mines.edu>
+Date:   Thu Feb 20 09:14:30 2014 -0800
+
+    Initial commit
