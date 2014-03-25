@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -13,26 +14,20 @@ public class ControlGUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue Game");
 		setSize(800, 300);	
+		setLayout(new GridLayout(2,3));
+		
 		
 		//create Control Panel First
 		WhoseTurnPanel whoseTurn = new WhoseTurnPanel();
-		add(whoseTurn, BorderLayout.NORTH);
+		add(whoseTurn);
 		GameAction gameAction = new GameAction();
-		add(gameAction, BorderLayout.WEST);
+		add(gameAction);
 		DiePanel dieP = new DiePanel();
-		add(dieP, BorderLayout.SOUTH);
+		add(dieP);
 		GuessPanel guessP = new GuessPanel();
-		add(guessP, BorderLayout.CENTER);
+		add(guessP);
 		GuessResultPanel guessResP = new GuessResultPanel();
-		add(guessResP, BorderLayout.CENTER);
-		
-		
-		
-		createLayout();	
-	}
-
-	private void createLayout() {
-		// TODO Auto-generated method stub
+		add(guessResP);
 		
 	}
 
