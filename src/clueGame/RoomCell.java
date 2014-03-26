@@ -76,11 +76,13 @@ public class RoomCell extends BoardCell{
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 12)); 
 		for (Character c: board.getKeys()) {
 			if(c.equals(roomInitial)) {
-				g.drawString(board.getRooms().get(c), startRow, startCol);
+				
+				g.drawString(board.getRooms().get(c), startRow+50, startCol+50);
 				board.getKeys().remove(c);
 				break;
 			}
 		}
+
 	}
 
 }

@@ -22,7 +22,7 @@ public class GameSetupTests {
 	@BeforeClass
 	public static void setup() {
 		ourGame = new Game();
-		ourGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
+		ourGame.loadConfigFiles();
 		ourGame.deal();
 	}
 	
@@ -66,7 +66,7 @@ public class GameSetupTests {
 		//Second Computer Player
 		computer = ourGame.getPlayers().get(5);
 		cNameExpected = "Col. Mustard";
-		cColorExpected = Color.yellow;
+		cColorExpected = Color.orange;
 		cCellExpected = ourGame.getGameBoard().getCellAt(0, 17); 
 		
 		Assert.assertEquals(cNameExpected, computer.getMyName()); //check name

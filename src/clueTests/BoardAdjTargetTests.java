@@ -9,12 +9,13 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.Game;
 
 public class BoardAdjTargetTests {
 	private static Board board;
 	@BeforeClass
 	public static void setUp() {
-		board = new Board();
+		board = new Board(new Game());
 		board.loadConfigFiles();
 		board.calcAdjacencies();
 	}
