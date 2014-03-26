@@ -42,10 +42,7 @@ public class DetectiveNotesGUI extends JDialog {
 		add(w);
 	}
 
-	public static void main(String[] args) {
-		DetectiveNotesGUI ourNotes = new DetectiveNotesGUI();
-		ourNotes.setVisible(true);
-	}
+	
 
 	public class RoomsPanel extends JPanel{
 
@@ -134,4 +131,8 @@ public class DetectiveNotesGUI extends JDialog {
 		}
 	}
 
+	public static void main(String[] args) {
+		DetectiveNotesGUI ourNotes = new DetectiveNotesGUI();
+		ourNotes.setVisible(true);
+	}
 }
