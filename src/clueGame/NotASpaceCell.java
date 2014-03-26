@@ -19,4 +19,5 @@ public class NotASpaceCell extends BoardCell {
 		
 	}
 
+	public void drawName(Graphics g, Board board){}
 }

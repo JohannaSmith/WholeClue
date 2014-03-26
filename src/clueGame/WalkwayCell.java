@@ -62,5 +62,7 @@ public class WalkwayCell extends BoardCell{
 		}
 		
 	}
+	
+	public void drawName(Graphics g, Board board){}
 
 }

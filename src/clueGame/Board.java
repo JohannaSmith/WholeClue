@@ -25,6 +25,7 @@ public class Board extends JPanel{
 	private boolean numRowsSet;
 	private boolean numColumnsSet;
 	private Map<Integer, LinkedList<Integer>> adjMtx;
+	private Set<Character> keySet;
 	private Set<BoardCell> targets;
 	boolean[] visited;
 	// Filenames
@@ -93,6 +94,7 @@ public class Board extends JPanel{
 			}
 		}
 		in.close();
+		keySet = rooms.keySet();
 	}
 	public void loadBoard() throws BadConfigFormatException, FileNotFoundException {
 		File f = new File(boardlayoutfile);
@@ -180,6 +182,12 @@ public class Board extends JPanel{
 		for(BoardCell cell: cells){
 			cell.draw(g, this);
 		}
+		
+		for(BoardCell cell: cells){
+			cell.drawName(g, this);
+		}
+		
+		
 	}
 
 	// Calculate Adjacencies / Paths
@@ -316,5 +324,8 @@ public class Board extends JPanel{
 	
 	public Game getGame(){
 		return game;
+	}
+	public Set<Character> getKeys() {
+		return keySet;
 	}
 }

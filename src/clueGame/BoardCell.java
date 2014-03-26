@@ -16,6 +16,7 @@ public abstract class BoardCell {
 	}
 	
 	public abstract void draw(Graphics g, Board board);
+	public abstract void drawName(Graphics g, Board board);
 	public boolean equals(BoardCell cell) {
 		// TODO Auto-generated method stub
 		return false;
