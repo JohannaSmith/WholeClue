@@ -6,6 +6,7 @@ import java.awt.Graphics;
 public class RoomCell extends BoardCell{
 	
 	private int row, col;
+	private final int DOOR_BOLD = 5;
 	
 	public RoomCell(Character roomInitial, DoorDirection doordirection) { //kept this method solely for the tests
 		super();
@@ -49,6 +50,26 @@ public class RoomCell extends BoardCell{
 		int startCol = col*board.CELL_SIDE;
 		g.setColor(Color.GRAY);
 		g.fillRect(startRow, startCol, board.CELL_SIDE, board.CELL_SIDE);
+		
+		if(isDoorway()){
+			g.setColor(Color.BLUE);
+			switch(doordirection) {
+			case NONE:
+				break;
+			case LEFT:
+				g.fillRect(startRow, startCol, DOOR_BOLD, board.CELL_SIDE);
+				break;
+			case RIGHT:
+				g.fillRect((startRow + board.CELL_SIDE - DOOR_BOLD), startCol, DOOR_BOLD, board.CELL_SIDE);
+				break;
+			case DOWN:
+				g.fillRect(startRow, (startCol+ board.CELL_SIDE - DOOR_BOLD), board.CELL_SIDE, DOOR_BOLD);
+				break;
+			case UP:
+				g.fillRect(startRow, startCol, board.CELL_SIDE, DOOR_BOLD);
+				break;
+			}
+		}
 	}
 
 }

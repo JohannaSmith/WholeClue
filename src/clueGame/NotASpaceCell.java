@@ -14,7 +14,7 @@ public class NotASpaceCell extends BoardCell {
 	public void draw(Graphics g, Board board) {
 		int startRow = row*board.CELL_SIDE;
 		int startCol = col*board.CELL_SIDE;
-		g.setColor(Color.RED);
+		g.setColor(Color.BLACK);
 		g.fillRect(startRow, startCol, board.CELL_SIDE, board.CELL_SIDE);
 		
 	}
