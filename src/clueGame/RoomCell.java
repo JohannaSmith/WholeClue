@@ -45,8 +45,8 @@ public class RoomCell extends BoardCell{
 	//to do override draw method
 	@Override
 	public void draw(Graphics g, Board board) {
-		int startRow = row*board.cellHeight;
-		int startCol = col*board.cellWidth;
+		int startRow = row*board.CELL_SIDE;
+		int startCol = col*board.CELL_SIDE;
 		
 		
 	}

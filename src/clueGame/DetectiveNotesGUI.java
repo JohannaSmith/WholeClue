@@ -93,7 +93,7 @@ public class DetectiveNotesGUI extends JDialog {
 	
 	public void createLayout(){
 		setSize(600, 300);
-		setLayout(new GridLayout(0, 2));
+		//setLayout(new GridLayout(0, 2));
 		setTitle("Detective Notes");
 		RoomsPanel rooms = new RoomsPanel();
 		add(rooms);

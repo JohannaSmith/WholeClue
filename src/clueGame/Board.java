@@ -36,8 +36,7 @@ public class Board extends JPanel{
 	public static final String WALKWAY_WORD = "Walkway";
 	public static final String NOTASPACE_WORD = "Not a Space";
 	//Cell Dimensions
-	public int cellWidth;
-	public int cellHeight;
+	public final int CELL_SIDE = 10;
 	public final int WINDOW_WIDTH = 1000; //to be used by GUI files
 	public final int WINDOW_HEIGHT = 750;
 	// Constructor
@@ -63,8 +62,6 @@ public class Board extends JPanel{
 		try {
 			loadLegend();
 			loadBoard();
-			cellWidth = numColumns/WINDOW_WIDTH;
-			cellHeight = numRows/WINDOW_HEIGHT;
 		}
 		catch(FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -161,8 +158,6 @@ public class Board extends JPanel{
 		numRows = cells.size() / numColumns;
 		numRowsSet = true;
 		visited = new boolean[getBoardSize()];
-		cellWidth = WINDOW_WIDTH/numColumns;
-		cellHeight = WINDOW_HEIGHT/numRows;
 		in.close();
 	}
 
