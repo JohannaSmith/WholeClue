@@ -22,6 +22,7 @@ public class DetectiveNotesGUI extends JDialog {
 	private JCheckBox candle, pipe, rope, knife, revolver, wrench;
 	private JCheckBox kitchen, conservatory, ballroom, hall, library, dining, billiards, study, lounge;
 	private JComboBox roomGuess;
+	private JComboBox peopleGuess;
 
 	public DetectiveNotesGUI() {
 		setSize(800, 400);
@@ -37,6 +38,8 @@ public class DetectiveNotesGUI extends JDialog {
 		add(rGuess);
 		peoplePanel people = new peoplePanel();
 		add(people);
+		PeopleGuessPanel pGuess = new PeopleGuessPanel();
+		add(pGuess);
 		weaponsPanel w = new weaponsPanel();
 		add(w);
 	}
@@ -125,6 +128,24 @@ public class DetectiveNotesGUI extends JDialog {
 			this.add(mustard);
 			this.add(white);
 			this.add(peacock);
+		}
+	}
+	
+	public class PeopleGuessPanel extends JPanel {
+		private JComboBox peopleGuess;
+		public PeopleGuessPanel(){
+
+			peopleGuess = new JComboBox();
+			setBorder(new TitledBorder(new EtchedBorder(), "People Guess"));
+			peopleGuess.addItem("Miss Scarlet");
+			peopleGuess.addItem("Conservatory");
+			peopleGuess.addItem("Ballroom");
+			peopleGuess.addItem("Hall");
+			peopleGuess.addItem("Library");
+			peopleGuess.addItem("Dining Room");
+			setLayout(new GridLayout(0,1));
+			this.add(peopleGuess);
+
 		}
 	}
 	public static void main(String[] args) {
