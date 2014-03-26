@@ -23,6 +23,7 @@ public class DetectiveNotesGUI extends JDialog {
 
 	public DetectiveNotesGUI() {
 
+		
 		setupPanels();
 		createLayout();
 	}

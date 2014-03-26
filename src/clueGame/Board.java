@@ -36,10 +36,10 @@ public class Board extends JPanel{
 	public static final String WALKWAY_WORD = "Walkway";
 	public static final String NOTASPACE_WORD = "Not a Space";
 	//Cell Dimensions
-	public static int cellWidth;
-	public static int cellHeight;
-	public static final int WINDOW_WIDTH = 1000; //to be used by GUI files
-	public static final int WINDOW_HEIGHT = 750;
+	public int cellWidth;
+	public int cellHeight;
+	public final int WINDOW_WIDTH = 1000; //to be used by GUI files
+	public final int WINDOW_HEIGHT = 750;
 	// Constructor
 	public Board() {
 		super();
@@ -151,9 +151,8 @@ public class Board extends JPanel{
 							throw new BadConfigFormatException('s');
 						}
 					}
-
-					int pixelRow = 0;
-					int pixelHeight = 0;
+					
+					
 					cells.add(new RoomCell(initial, direction, row, col));
 					row++;
 				}
