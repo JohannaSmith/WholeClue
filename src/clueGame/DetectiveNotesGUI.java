@@ -23,6 +23,13 @@ public class DetectiveNotesGUI extends JDialog {
 		mustard = new JCheckBox("Colonel Mustard");
 		white = new JCheckBox("Mrs. White");
 		peacock = new JCheckBox("Mrs. Peacock");
+		
+		add(scarlet);
+		add(green);
+		add(plum);
+		add(mustard);
+		add(white);
+		add(peacock);
 	}
 	
 	
