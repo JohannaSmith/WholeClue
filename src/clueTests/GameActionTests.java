@@ -31,7 +31,7 @@ public class GameActionTests {
 	@BeforeClass
 	public static void setup() {
 		ourGame = new Game();
-		ourGame.loadConfigFiles("./ourboardfiles/StartCharacters.txt", "./ourboardfiles/Weapons.txt");
+		ourGame.loadConfigFiles();
 
 		//write a few new cards NOT added to the deck, but added to a player's cards in order to test disproving suggestions
 		mustardCard = new Card("Col. Mustard", CardType.PERSON);

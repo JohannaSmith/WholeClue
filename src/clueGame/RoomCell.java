@@ -70,6 +70,8 @@ public class RoomCell extends BoardCell{
 				break;
 			}
 		}
+		
+		g.drawString("Hello", 20, 10);
 	}
 
 }
