@@ -21,13 +21,17 @@ public class DetectiveNotesGUI extends JDialog {
 	private JCheckBox scarlet, green, plum, mustard, white, peacock;
 	private JCheckBox candle, pipe, rope, knife, revolver, wrench;
 	private JCheckBox kitchen, conservatory, ballroom, hall, library, dining, billiards, study, lounge;
-	private JComboBox roomGuess, weaponsGuess;
+
+	private JComboBox roomGuess;
+	private JComboBox weaponsGuess;
+	private JComboBox peopleGuess;
 
 	public DetectiveNotesGUI() {
 
 		setSize(800, 400);
 		setupPanels();
 	}
+
 
 
 	public class RoomsPanel extends JPanel{
@@ -108,7 +112,7 @@ public class DetectiveNotesGUI extends JDialog {
 		public WeaponsGuessPanel(){
 
 			weaponsGuess = new JComboBox();
-			setBorder(new TitledBorder(new EtchedBorder(), "Room Guess"));
+			setBorder(new TitledBorder(new EtchedBorder(), "Weapons Guess"));
 			weaponsGuess.addItem("Candle");
 			weaponsGuess.addItem("Lead Pipe");
 			weaponsGuess.addItem("Rope");
@@ -140,6 +144,7 @@ public class DetectiveNotesGUI extends JDialog {
 		}
 	}
 	
+
 	public void setupPanels() { // read names from file
 		setLayout(new GridLayout(3,2));
 		setTitle("Detective Notes");
@@ -149,6 +154,8 @@ public class DetectiveNotesGUI extends JDialog {
 		add(rGuess);
 		peoplePanel people = new peoplePanel();
 		add(people);
+		PeopleGuessPanel pGuess = new PeopleGuessPanel();
+		add(pGuess);
 		WeaponsPanel w = new WeaponsPanel();
 		add(w);
 		WeaponsGuessPanel wGuess = new WeaponsGuessPanel();
@@ -166,10 +173,28 @@ public class DetectiveNotesGUI extends JDialog {
 		
 	}
 */
+
+	public class PeopleGuessPanel extends JPanel {
+		private JComboBox peopleGuess;
+		public PeopleGuessPanel(){
+
+			peopleGuess = new JComboBox();
+			setBorder(new TitledBorder(new EtchedBorder(), "People Guess"));
+			peopleGuess.addItem("Miss Scarlet");
+			peopleGuess.addItem("Conservatory");
+			peopleGuess.addItem("Ballroom");
+			peopleGuess.addItem("Hall");
+			peopleGuess.addItem("Library");
+			peopleGuess.addItem("Dining Room");
+			setLayout(new GridLayout(0,1));
+			this.add(peopleGuess);
+
+		}
+	}
+	
 	public static void main(String[] args) {
 		DetectiveNotesGUI ourNotes = new DetectiveNotesGUI();
 		ourNotes.setVisible(true);
 	}
-
 }
 
