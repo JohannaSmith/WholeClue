@@ -1,11 +1,24 @@
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class RoomCell extends BoardCell{
 	
-	public RoomCell(Character roomInitial, DoorDirection doordirection) {
+	private int row, col;
+	
+	public RoomCell(Character roomInitial, DoorDirection doordirection) { //kept this method solely for the tests
 		super();
 		this.roomInitial = roomInitial;
 		this.doordirection = doordirection;
+	}
+	
+	public RoomCell(Character roomInitial, DoorDirection doordirection, int row, int col) {
+		super();
+		this.roomInitial = roomInitial;
+		this.doordirection = doordirection;
+		this.row = row;
+		this.col = col;
 	}
 
 	public enum DoorDirection {UP, DOWN, LEFT, RIGHT, NONE};
@@ -28,6 +41,14 @@ public class RoomCell extends BoardCell{
 	public char getInitial() {
 		return roomInitial;
 	}
+	
 	//to do override draw method
+	@Override
+	public void draw(Graphics g, Board board) {
+		int startRow = row*board.cellHeight;
+		int startCol = col*board.cellWidth;
+		
+		
+	}
 
 }
