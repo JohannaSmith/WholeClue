@@ -3,8 +3,10 @@ package clueGame;
 import java.awt.GridLayout;
 
 import javax.swing.JCheckBox;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -80,7 +82,8 @@ public class DetectiveNotesGUI extends JDialog {
 			roomGuess.addItem("Billiards Room");
 			roomGuess.addItem("Study");
 			roomGuess.addItem("Lounge");
-
+			roomGuess.addItem("Unsure");
+			setLayout(new GridLayout(0,1));
 			this.add(roomGuess);
 
 		}

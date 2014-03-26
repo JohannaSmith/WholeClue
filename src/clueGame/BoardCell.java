@@ -1,9 +1,8 @@
 package clueGame;
 
+import java.awt.Graphics;
+
 public abstract class BoardCell {
-	
-	//instance vars
-	private int cell;
 	
 	//Methods
 	public boolean isWalkway() {
@@ -15,5 +14,7 @@ public abstract class BoardCell {
 	public boolean isDoorway() {
 		return false;
 	}
+	
+	public abstract void draw(Graphics g, Board board);
 	//to do draw method
 }
