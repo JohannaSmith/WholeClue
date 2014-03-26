@@ -32,8 +32,6 @@ public class DetectiveNotesGUI extends JDialog {
 		setupPanels();
 	}
 
-
-
 	public class RoomsPanel extends JPanel{
 
 		public RoomsPanel(){
@@ -162,18 +160,6 @@ public class DetectiveNotesGUI extends JDialog {
 		add(wGuess);
 	}
 	
-	/*public void createLayout(){
-		//setSize(600, 300);
-		setLayout(new GridLayout(0, 2));
-		setTitle("Detective Notes");
-		RoomsPanel rooms = new RoomsPanel();
-		add(rooms);
-		RoomGuessPanel rGuess = new RoomGuessPanel();
-		add(rGuess);
-		
-	}
-*/
-
 	public class PeopleGuessPanel extends JPanel {
 		private JComboBox peopleGuess;
 		public PeopleGuessPanel(){
@@ -190,11 +176,6 @@ public class DetectiveNotesGUI extends JDialog {
 			this.add(peopleGuess);
 
 		}
-	}
-	
-	public static void main(String[] args) {
-		DetectiveNotesGUI ourNotes = new DetectiveNotesGUI();
-		ourNotes.setVisible(true);
 	}
 }
 
