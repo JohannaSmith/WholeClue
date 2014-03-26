@@ -39,9 +39,13 @@ public class Board extends JPanel{
 	public final int CELL_SIDE = 20;
 	public final int WINDOW_WIDTH = 1000; //to be used by GUI files
 	public final int WINDOW_HEIGHT = 750;
+	
+	//Game Instance
+	private Game game;
 	// Constructor
-	public Board() {
+	public Board(Game game) {
 		super();
+		this.game = game;
 		legendfile = LEGEND_FILE_DEFAULT;
 		boardlayoutfile = LAYOUT_FILE_DEFAULT;
 		cells = new LinkedList<BoardCell>();
@@ -308,5 +312,9 @@ public class Board extends JPanel{
 	}
 	public int getBoardSize() {
 		return numColumns * numRows;
+	}
+	
+	public Game getGame(){
+		return game;
 	}
 }

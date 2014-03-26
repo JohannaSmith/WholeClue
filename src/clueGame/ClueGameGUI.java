@@ -8,7 +8,9 @@ public class ClueGameGUI extends JFrame {
 
 	private Board board;
 	public ClueGameGUI(){
-		board = new Board();
+		Game game = new Game();
+		game.loadConfigFiles();
+		Board board = game.getGameBoard();
 		board.loadConfigFiles();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue Game");

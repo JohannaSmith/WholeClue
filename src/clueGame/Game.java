@@ -12,12 +12,15 @@ import java.lang.reflect.Field;
 
 public class Game {
 
-	private Board ourGameBoard = new Board();
+	private Board ourGameBoard = new Board(this);
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Card> deck = new ArrayList<Card>();
 	private ArrayList<Card> deckClone;
 	private ArrayList<Card>	solution = new ArrayList<Card>();
 	Solution solution1;
+	
+	public final String PLAYERS = "./ourboardfiles/StartCharacters.txt";
+	public final String WEAPONS = "./ourboardfiles/Weapons.txt";
 
 	private int locationCellX; // for game action tests
 	private int locationCellY; // for game action tests
@@ -52,11 +55,11 @@ public class Game {
 		}
 
 	}
-	public void loadConfigFiles(String p, String w){
+	public void loadConfigFiles(){
 		try{
 			ourGameBoard.loadConfigFiles();
-			loadWeapons(w);
-			loadPlayers(p);
+			loadWeapons(WEAPONS);
+			loadPlayers(PLAYERS);
 			loadRooms();
 		} catch(BadConfigFormatException b) {
 			System.out.println("Bad config file. Please look at your config file and make sure you haven't ruined something.");
