@@ -1,7 +1,9 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.util.Set;
 
 public class RoomCell extends BoardCell{
 	
@@ -67,6 +69,15 @@ public class RoomCell extends BoardCell{
 				break;
 			case UP:
 				g.fillRect(startRow, startCol, board.CELL_SIDE, DOOR_BOLD);
+				break;
+			}
+		}
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 12)); 
+		for (Character c: board.getKeys()) {
+			if(c.equals(roomInitial)) {
+				g.drawString(board.getRooms().get(c), startRow, startCol);
+				board.getKeys().remove(c);
 				break;
 			}
 		}
