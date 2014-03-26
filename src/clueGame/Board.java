@@ -1,10 +1,12 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -12,7 +14,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Board {
+import javax.swing.JPanel;
+
+public class Board extends JPanel{
 	// Instance Vars
 	LinkedList<BoardCell> cells;
 	Map<Character,String> rooms;
@@ -31,6 +35,11 @@ public class Board {
 	// Legend Reserved Words
 	public static final String WALKWAY_WORD = "Walkway";
 	public static final String NOTASPACE_WORD = "Not a Space";
+	//Cell Dimensions
+	public static int cellWidth;
+	public static int cellHeight;
+	public static final int WINDOW_WIDTH = 1000; //to be used by GUI files
+	public static final int WINDOW_HEIGHT = 750;
 	// Constructor
 	public Board() {
 		super();
@@ -54,6 +63,8 @@ public class Board {
 		try {
 			loadLegend();
 			loadBoard();
+			cellWidth = numColumns/WINDOW_WIDTH;
+			cellHeight = numRows/WINDOW_HEIGHT;
 		}
 		catch(FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -85,6 +96,7 @@ public class Board {
 	public void loadBoard() throws BadConfigFormatException, FileNotFoundException {
 		File f = new File(boardlayoutfile);
 		Scanner in = new Scanner(new BufferedReader(new FileReader(f)));
+		int row = 0;
 		do {
 			String line = in.nextLine();
 			if(line.equals(""))
@@ -97,12 +109,16 @@ public class Board {
 			else if(arr.length != numColumns) {
 				throw new BadConfigFormatException('c');
 			}
+
 			for(String s : arr) {
+				
+				int col = Arrays.asList(arr).indexOf(s);
+				
 				if(!rooms.containsKey(s.charAt(0))) {
 					throw new BadConfigFormatException('s');
 				}
 				if(rooms.get(s.charAt(0)).toLowerCase().equals(WALKWAY_WORD.toLowerCase())) { // Walkway Cell
-					cells.add(new WalkwayCell());
+					cells.add(new WalkwayCell(row, col));
 				}
 				else if(rooms.get(s.charAt(0)).toLowerCase().equals(NOTASPACE_WORD.toLowerCase())) {
 					cells.add(new NotASpaceCell());
@@ -135,15 +151,29 @@ public class Board {
 							throw new BadConfigFormatException('s');
 						}
 					}
-					cells.add(new RoomCell(initial, direction));
+
+					int pixelRow = 0;
+					int pixelHeight = 0;
+					cells.add(new RoomCell(initial, direction, row, col));
+					row++;
 				}
 			}
 		} while(in.hasNextLine());
 		numRows = cells.size() / numColumns;
 		numRowsSet = true;
 		visited = new boolean[getBoardSize()];
+		cellWidth = WINDOW_WIDTH/numColumns;
+		cellHeight = WINDOW_HEIGHT/numRows;
 		in.close();
 	}
+
+	//Draw Method
+	public void paintComponent(Graphics g){
+		for(BoardCell cell: cells){
+			cell.draw(g, this);
+		}
+	}
+
 	// Calculate Adjacencies / Paths
 	public void calcAdjacencies() {
 		// Init Map
