@@ -18,30 +18,17 @@ import javax.swing.border.TitledBorder;
 
 public class DetectiveNotesGUI extends JDialog {
 	private JDialog guesses = new JDialog();
-	private JPanel peopleList = new JPanel();
 	private JCheckBox scarlet, green, plum, mustard, white, peacock;
-	private JPanel weaponsList = new JPanel();
 	private JCheckBox candle, pipe, rope, knife, revolver, wrench;
 	private JCheckBox kitchen, conservatory, ballroom, hall, library, dining, billiards, study, lounge;
-	private JComboBox roomGuess;
+	private JComboBox roomGuess, weaponsGuess;
 
 	public DetectiveNotesGUI() {
 
-		setSize(600, 300);
+		setSize(800, 400);
 		setupPanels();
 	}
 
-	public void setupPanels() { // read names from file
-		setTitle("Detective Notes");
-		RoomsPanel rooms = new RoomsPanel();
-		add(rooms);
-		RoomGuessPanel rGuess = new RoomGuessPanel();
-		add(rGuess);
-		peoplePanel people = new peoplePanel();
-		add(people);
-		weaponsPanel w = new weaponsPanel();
-		add(w);
-	}
 
 	public class RoomsPanel extends JPanel{
 
@@ -96,24 +83,42 @@ public class DetectiveNotesGUI extends JDialog {
 	}
 
 
-	public class weaponsPanel extends JPanel{
-		public weaponsPanel(){
+	public class WeaponsPanel extends JPanel{
+		public WeaponsPanel(){
 			candle = new JCheckBox("Candlestick");
 			pipe = new JCheckBox("Lead Pipe");
 			rope = new JCheckBox("Rope");
 			knife = new JCheckBox("Knife");
 			revolver = new JCheckBox("Revolver");
 			wrench = new JCheckBox("Wrench");
-			weaponsList.setLayout(new GridLayout(3, 2));
-			weaponsList.setBorder(new TitledBorder (new EtchedBorder(), "Weapons"));
-			weaponsList.add(candle);
-			weaponsList.add(pipe);
-			weaponsList.add(rope);
-			weaponsList.add(knife);
-			weaponsList.add(revolver);
-			weaponsList.add(knife);
+			this.setBorder(new TitledBorder (new EtchedBorder(), "Weapons"));
+			setLayout(new GridLayout(0,2));
+			this.add(candle);
+			this.add(pipe);
+			this.add(rope);
+			this.add(knife);
+			this.add(revolver);
+			this.add(wrench);
 		}
 
+	}
+	
+	public class WeaponsGuessPanel extends JPanel{
+		private JComboBox roomGuess;
+		public WeaponsGuessPanel(){
+
+			weaponsGuess = new JComboBox();
+			setBorder(new TitledBorder(new EtchedBorder(), "Room Guess"));
+			weaponsGuess.addItem("Candle");
+			weaponsGuess.addItem("Lead Pipe");
+			weaponsGuess.addItem("Rope");
+			weaponsGuess.addItem("Knife");
+			weaponsGuess.addItem("Revolver");
+			weaponsGuess.addItem("Wrench");
+			setLayout(new GridLayout(0,1));
+			this.add(weaponsGuess);
+
+		}
 	}
 	public class peoplePanel extends JPanel{
 
@@ -124,8 +129,8 @@ public class DetectiveNotesGUI extends JDialog {
 			mustard = new JCheckBox("Colonel Mustard");
 			white = new JCheckBox("Mrs. White");
 			peacock = new JCheckBox("Mrs. Peacock");
-			setLayout(new GridLayout(5,2));
 			setBorder(new TitledBorder (new EtchedBorder(), "People"));
+			setLayout(new GridLayout(0,2));
 			this.add(scarlet);
 			this.add(green);
 			this.add(plum);
@@ -135,15 +140,32 @@ public class DetectiveNotesGUI extends JDialog {
 		}
 	}
 	
-	public void createLayout(){
-		setSize(600, 300);
+	public void setupPanels() { // read names from file
+		setLayout(new GridLayout(3,2));
+		setTitle("Detective Notes");
+		RoomsPanel rooms = new RoomsPanel();
+		add(rooms);
+		RoomGuessPanel rGuess = new RoomGuessPanel();
+		add(rGuess);
+		peoplePanel people = new peoplePanel();
+		add(people);
+		WeaponsPanel w = new WeaponsPanel();
+		add(w);
+		WeaponsGuessPanel wGuess = new WeaponsGuessPanel();
+		add(wGuess);
+	}
+	
+	/*public void createLayout(){
+		//setSize(600, 300);
 		setLayout(new GridLayout(0, 2));
 		setTitle("Detective Notes");
 		RoomsPanel rooms = new RoomsPanel();
 		add(rooms);
 		RoomGuessPanel rGuess = new RoomGuessPanel();
 		add(rGuess);
+		
 	}
+*/
 	public static void main(String[] args) {
 		DetectiveNotesGUI ourNotes = new DetectiveNotesGUI();
 		ourNotes.setVisible(true);
