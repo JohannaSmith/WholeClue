@@ -1,0 +1,3 @@
+Column count mismatch.
+Bad cell symbol.
+Legend line does not consist of key/value pair.

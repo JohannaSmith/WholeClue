@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import clueGame.RoomCell.DoorDirection;
@@ -23,7 +24,12 @@ public class WalkwayCell extends BoardCell{
 
 	@Override
 	public void draw(Graphics g, Board board) {
-		// TODO Auto-generated method stub
+		int startRow = row*board.CELL_SIDE;
+		int startCol = col*board.CELL_SIDE;
+		g.setColor(Color.YELLOW);
+		g.fillRect(startRow, startCol, board.CELL_SIDE, board.CELL_SIDE);
+		g.setColor(Color.BLACK);
+		g.drawRect(startRow, startCol, board.CELL_SIDE, board.CELL_SIDE);
 		
 	}
 

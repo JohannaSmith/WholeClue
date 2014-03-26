@@ -36,7 +36,7 @@ public class Board extends JPanel{
 	public static final String WALKWAY_WORD = "Walkway";
 	public static final String NOTASPACE_WORD = "Not a Space";
 	//Cell Dimensions
-	public final int CELL_SIDE = 10;
+	public final int CELL_SIDE = 20;
 	public final int WINDOW_WIDTH = 1000; //to be used by GUI files
 	public final int WINDOW_HEIGHT = 750;
 	// Constructor
@@ -93,7 +93,7 @@ public class Board extends JPanel{
 	public void loadBoard() throws BadConfigFormatException, FileNotFoundException {
 		File f = new File(boardlayoutfile);
 		Scanner in = new Scanner(new BufferedReader(new FileReader(f)));
-		int row = 0;
+		int col = 0;
 		do {
 			String line = in.nextLine();
 			if(line.equals(""))
@@ -107,18 +107,24 @@ public class Board extends JPanel{
 				throw new BadConfigFormatException('c');
 			}
 
+			int row = 0;
+			
 			for(String s : arr) {
 				
-				int col = Arrays.asList(arr).indexOf(s);
+				
+				//int col = Arrays.asList(arr).indexOf(s);
+				//System.out.println("Col input: " + col);
 				
 				if(!rooms.containsKey(s.charAt(0))) {
 					throw new BadConfigFormatException('s');
 				}
 				if(rooms.get(s.charAt(0)).toLowerCase().equals(WALKWAY_WORD.toLowerCase())) { // Walkway Cell
 					cells.add(new WalkwayCell(row, col));
+					row++;
 				}
 				else if(rooms.get(s.charAt(0)).toLowerCase().equals(NOTASPACE_WORD.toLowerCase())) {
-					cells.add(new NotASpaceCell());
+					cells.add(new NotASpaceCell(row, col));
+					row++;
 				}
 				else { // Room
 					Character initial = s.charAt(0);
@@ -153,7 +159,10 @@ public class Board extends JPanel{
 					cells.add(new RoomCell(initial, direction, row, col));
 					row++;
 				}
+				
 			}
+			col++;
+			
 		} while(in.hasNextLine());
 		numRows = cells.size() / numColumns;
 		numRowsSet = true;
@@ -161,8 +170,9 @@ public class Board extends JPanel{
 		in.close();
 	}
 
-	//Draw Method
+	//Paint Component Method
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		for(BoardCell cell: cells){
 			cell.draw(g, this);
 		}
